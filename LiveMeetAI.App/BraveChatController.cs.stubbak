@@ -1,0 +1,52 @@
+﻿using System;
+using System.Threading.Tasks;
+
+namespace LiveMeetAI.AI
+{
+    // Minimal stub to satisfy build while you work on the full implementation.
+    // Replace with full Selenium-based Brave automation later.
+    public class BraveChatController : IDisposable
+    {
+        public string BravePath { get; }
+        public string UserDataDir { get; }
+        public string ChromeDriverDirectory { get; }
+
+        // Matches constructor calls used in MainWindow.xaml.cs
+        public BraveChatController(string bravePath, string userDataDir, string chromeDriverDir = null)
+        {
+            BravePath = bravePath ?? throw new ArgumentNullException(nameof(bravePath));
+            UserDataDir = userDataDir ?? throw new ArgumentNullException(nameof(userDataDir));
+            ChromeDriverDirectory = chromeDriverDir;
+            // NOTE: this stub does not start ChromeDriver or a browser.
+            // Replace with real Selenium code when ready.
+        }
+
+        // Basic synchronous attempt to send text to ChatGPT (stubbed)
+        // Return true when you consider it "sent"  here we return true to indicate success.
+        public bool TrySendToBraveChat(string text, int timeoutMs = 20000)
+        {
+            if (string.IsNullOrWhiteSpace(text)) return false;
+            // In the real implementation: find ChatGPT tab, focus, paste text, submit, etc.
+            // For now we simply pretend it succeeded.
+            return true;
+        }
+
+        // Async version (if other code uses it)
+        public Task<bool> TrySendToBraveChatAsync(string text, int timeoutMs = 20000)
+        {
+            return Task.FromResult(TrySendToBraveChat(text, timeoutMs));
+        }
+
+        // Optionally used by other code  safe no-op
+        public void EnsureWindowStarted()
+        {
+            // no-op in stub
+        }
+
+        // Dispose pattern
+        public void Dispose()
+        {
+            // no-op
+        }
+    }
+}

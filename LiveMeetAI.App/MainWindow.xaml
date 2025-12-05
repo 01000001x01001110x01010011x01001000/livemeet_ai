@@ -1,0 +1,24 @@
+<Window x:Class="LiveMeetAI.App.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="LiveMeetAI" Height="480" Width="800">
+    <Grid Margin="8">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <TextBox x:Name="TranscriptBox" Grid.Row="0" IsReadOnly="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" />
+        <TextBox x:Name="AiBox" Grid.Row="1" IsReadOnly="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" />
+
+        <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="0,8,0,0">
+            <TextBlock VerticalAlignment="Center" Text="Ask (manual):" Margin="0,0,6,0"/>
+            <TextBox x:Name="AskBox" Width="500" />
+            <Button Content="Ask" Click="Ask_Click" Margin="6,0,0,0"/>
+            <Button Content="Start System" Click="StartSystem_Click" Margin="6,0,0,0"/>
+            <Button Content="Start Mic" Click="StartMic_Click" Margin="6,0,0,0"/>
+            <Button Content="Stop" Click="Stop_Click" Margin="6,0,0,0"/>
+        </StackPanel>
+    </Grid>
+</Window>

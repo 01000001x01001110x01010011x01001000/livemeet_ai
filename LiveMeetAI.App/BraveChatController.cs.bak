@@ -1,0 +1,236 @@
+﻿using System;
+using System.IO;
+using System.Threading;
+using System.Threading.Tasks;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Chrome;
+
+namespace LiveMeetAI.AI
+{
+    /// <summary>
+    /// BraveChatController: manages a dedicated Brave browser window for LiveMeetAI.
+    /// - Uses ChromeDriver but points binary location at Brave executable.
+    /// - Starts Brave with a dedicated user-data-dir to avoid touching user's main profile.
+    /// - Opens ChatGPT (chat.openai.com) and types text into the main textarea, then sends it.
+    /// </summary>
+    public class BraveChatController : IDisposable
+    {
+        private readonly string braveExePath;
+        private readonly string userDataDir;
+        private readonly string chromeDriverDir;
+        private ChromeDriver? driver;
+        private readonly object lockObj = new object();
+        private readonly TimeSpan DefaultTimeout = TimeSpan.FromSeconds(20);
+
+        public BraveChatController(string braveExePath, string userDataDir, string chromeDriverDir = null)
+        {
+            this.braveExePath = braveExePath ?? throw new ArgumentNullException(nameof(braveExePath));
+            this.userDataDir = userDataDir ?? Path.Combine(Path.GetTempPath(), "LiveMeetAI-Brave-Profile");
+            this.chromeDriverDir = string.IsNullOrWhiteSpace(chromeDriverDir) ? null : chromeDriverDir;
+
+            // Ensure profile dir exists
+            try { Directory.CreateDirectory(this.userDataDir); } catch { /* best-effort */ }
+        }
+
+        /// <summary>
+        /// Ensure browser started (launches ChromeDriver + Brave if needed). Thread-safe.
+        /// </summary>
+        public void EnsureStarted()
+        {
+            lock (lockObj)
+            {
+                if (driver != null) return;
+
+                ChromeOptions options = new ChromeOptions();
+                // Point to Brave binary
+                options.BinaryLocation = braveExePath;
+
+                // Use a fresh dedicated user-data-dir so we don't interfere with user's profile.
+                options.AddArgument($"--user-data-dir={userDataDir}");
+                options.AddArgument("--no-first-run");
+                options.AddArgument("--no-default-browser-check");
+                options.AddArgument("--disable-extensions");
+                options.AddArgument("--disable-popup-blocking");
+                options.AddArgument("--start-maximized");
+                // Open a new window
+                options.AddArgument("--new-window");
+
+                // Consider disabling sandbox on Windows if driver fails to launch (careful security wise)
+                // options.AddArgument("--disable-gpu");
+
+                // Create ChromeDriverService
+                ChromeDriverService service;
+                if (!string.IsNullOrWhiteSpace(chromeDriverDir) && Directory.Exists(chromeDriverDir))
+                {
+                    service = ChromeDriverService.CreateDefaultService(chromeDriverDir);
+                }
+                else
+                {
+                    // fallback: default service (requires chromedriver on PATH or Selenium.WebDriver.ChromeDriver package)
+                    service = ChromeDriverService.CreateDefaultService();
+                }
+
+                // Hide the console window for chromedriver if desired:
+                service.HideCommandPromptWindow = true;
+                service.EnableVerboseLogging = false;
+
+                // Start driver
+                try
+                {
+                    driver = new ChromeDriver(service, options, TimeSpan.FromSeconds(30));
+                }
+                catch (Exception ex)
+                {
+                    // Attempt a more forgiving start (diagnostic)
+                    try
+                    {
+                        service.HideCommandPromptWindow = false;
+                        driver = new ChromeDriver(service, options, TimeSpan.FromSeconds(30));
+                    }
+                    catch (Exception inner)
+                    {
+                        // throw the original to caller
+                        throw new InvalidOperationException("Failed to start ChromeDriver for Brave. See inner exception.", inner);
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Navigate to ChatGPT and ensure the page is loaded and input present.
+        /// </summary>
+        private void EnsureChatPageLoaded(TimeSpan timeout)
+        {
+            EnsureStarted();
+
+            // Navigate to ChatGPT (explicit URL)
+            var url = "https://chat.openai.com/";
+            driver!.Navigate().GoToUrl(url);
+
+            // Wait until the main textarea is present or the chat input element (multiple selectors attempted)
+            var waitUntil = DateTime.UtcNow + timeout;
+            while (DateTime.UtcNow < waitUntil)
+            {
+                try
+                {
+                    // common chat input selectors (textarea or contenteditable div)
+                    var textarea = driver.FindElements(By.CssSelector("textarea")).Count > 0
+                        ? driver.FindElement(By.CssSelector("textarea"))
+                        : null;
+                    if (textarea != null && textarea.Displayed && textarea.Enabled)
+                    {
+                        return;
+                    }
+
+                    // try contenteditable
+                    var editable = driver.FindElements(By.CssSelector("[contenteditable='true']")).Count > 0
+                        ? driver.FindElement(By.CssSelector("[contenteditable='true']"))
+                        : null;
+                    if (editable != null && editable.Displayed && editable.Enabled)
+                    {
+                        return;
+                    }
+                }
+                catch { /* ignore and retry */ }
+
+                Thread.Sleep(250);
+            }
+
+            // last attempt: allow it to be slow and return (caller will attempt to type and may fail)
+        }
+
+        /// <summary>
+        /// Sends text to chat: loads page (if needed), types text and presses Enter.
+        /// Returns true on success.
+        /// </summary>
+        public bool SendTextToChat(string text, int timeoutSeconds = 20)
+        {
+            if (string.IsNullOrWhiteSpace(text)) return false;
+
+            try
+            {
+                EnsureChatPageLoaded(TimeSpan.FromSeconds(timeoutSeconds));
+
+                // locate the input element again (best-effort multiple selectors)
+                IWebElement? input = null;
+
+                try
+                {
+                    var textareas = driver!.FindElements(By.CssSelector("textarea"));
+                    if (textareas.Count > 0) input = textareas[0];
+                }
+                catch { /* ignore */ }
+
+                if (input == null)
+                {
+                    try
+                    {
+                        var editables = driver!.FindElements(By.CssSelector("[contenteditable='true']"));
+                        if (editables.Count > 0) input = editables[0];
+                    }
+                    catch { /* ignore */ }
+                }
+
+                if (input == null)
+                {
+                    // fallback: open DevTools console? Just fail gracefully
+                    return false;
+                }
+
+                // click to focus
+                try { input.Click(); } catch { /* ignore */ }
+
+                // clear existing and send text (some editors require sending keys slowly)
+                try
+                {
+                    input.Clear();
+                }
+                catch { /* not all editors support Clear() */ }
+
+                // send text in chunks to avoid lost keystrokes
+                const int chunkSize = 200;
+                for (int i = 0; i < text.Length; i += chunkSize)
+                {
+                    var chunk = text.Substring(i, Math.Min(chunkSize, text.Length - i));
+                    input.SendKeys(chunk);
+                    Thread.Sleep(30);
+                }
+
+                // Press Enter to submit (some UIs need SHIFT+ENTER for newline; we assume Enter submits)
+                input.SendKeys(Keys.Enter);
+
+                // optionally wait a short time for UI response
+                Thread.Sleep(500);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                // bubble up/logging to caller - but swallow here and return false
+                try
+                {
+                    File.AppendAllText("logs/brave_ctrl.log", DateTime.Now.ToString("o") + " SendText failed: " + ex + Environment.NewLine);
+                }
+                catch { }
+                return false;
+            }
+        }
+
+        public void Dispose()
+        {
+            lock (lockObj)
+            {
+                try
+                {
+                    driver?.Quit();
+                }
+                catch { }
+                try
+                {
+                    driver?.Dispose();
+                }
+                catch { }
+                driver = null;
+            }
+        }
+    }
+}

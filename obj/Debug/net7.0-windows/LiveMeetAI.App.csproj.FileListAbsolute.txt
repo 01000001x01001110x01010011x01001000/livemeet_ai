@@ -1,0 +1,11 @@
+C:\Users\pc\Documents\GitHub\livemeet_ai\obj\Debug\net7.0-windows\LiveMeetAI.App.csproj.AssemblyReference.cache
+C:\Users\pc\Documents\GitHub\livemeet_ai\obj\Debug\net7.0-windows\LiveMeetAI.App\App.baml
+C:\Users\pc\Documents\GitHub\livemeet_ai\obj\Debug\net7.0-windows\LiveMeetAI.App\MainWindow.baml
+C:\Users\pc\Documents\GitHub\livemeet_ai\obj\Debug\net7.0-windows\LiveMeetAI.App\App.g.cs
+C:\Users\pc\Documents\GitHub\livemeet_ai\obj\Debug\net7.0-windows\LiveMeetAI.App\MainWindow.g.cs
+C:\Users\pc\Documents\GitHub\livemeet_ai\obj\Debug\net7.0-windows\LiveMeetAI.App_MarkupCompile.cache
+C:\Users\pc\Documents\GitHub\livemeet_ai\obj\Debug\net7.0-windows\LiveMeetAI.App.g.resources
+C:\Users\pc\Documents\GitHub\livemeet_ai\obj\Debug\net7.0-windows\LiveMeetAI.App.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\pc\Documents\GitHub\livemeet_ai\obj\Debug\net7.0-windows\LiveMeetAI.App.AssemblyInfoInputs.cache
+C:\Users\pc\Documents\GitHub\livemeet_ai\obj\Debug\net7.0-windows\LiveMeetAI.App.AssemblyInfo.cs
+C:\Users\pc\Documents\GitHub\livemeet_ai\obj\Debug\net7.0-windows\LiveMeetAI.App.csproj.CoreCompileInputs.cache

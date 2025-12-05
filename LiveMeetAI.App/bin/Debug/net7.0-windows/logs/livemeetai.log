@@ -1,0 +1,43 @@
+2025-12-06 02:19:06.335 [INFO] Started system capture
+2025-12-06 02:19:10.825 [DEBUG] Audio chunk ready (system) size=387898
+2025-12-06 02:19:11.373 [INFO] STT chunk received:  Conversation is...
+2025-12-06 02:19:11.879 [DEBUG] Audio chunk ready (system) size=403258
+2025-12-06 02:19:12.399 [INFO] STT chunk received:  Just try to figure out.
+2025-12-06 02:19:12.875 [DEBUG] Audio chunk ready (system) size=384058
+2025-12-06 02:19:13.415 [INFO] STT chunk received:  what that future.
+2025-12-06 02:19:13.928 [DEBUG] Audio chunk ready (system) size=403258
+2025-12-06 02:19:14.422 [INFO] STT chunk received:  really looks like.
+2025-12-06 02:19:14.981 [DEBUG] Audio chunk ready (system) size=403258
+2025-12-06 02:19:15.503 [INFO] STT chunk received:  to paint a picture.
+2025-12-06 02:19:15.975 [DEBUG] Audio chunk ready (system) size=384058
+2025-12-06 02:19:16.506 [INFO] STT chunk received:  of the future marks.
+2025-12-06 02:19:17.030 [DEBUG] Audio chunk ready (system) size=403258
+2025-12-06 02:19:17.564 [INFO] STT chunk received:  Zuckerberg is trying.
+2025-12-06 02:19:18.030 [DEBUG] Audio chunk ready (system) size=384058
+2025-12-06 02:19:18.545 [INFO] STT chunk received:  to build. So the
+2025-12-06 02:19:19.028 [DEBUG] Audio chunk ready (system) size=384058
+2025-12-06 02:19:19.573 [INFO] STT chunk received:  that you can decide for yourself.
+2025-12-06 02:19:20.080 [DEBUG] Audio chunk ready (system) size=403258
+2025-12-06 02:19:20.617 [INFO] STT chunk received:  what you think of it.
+2025-12-06 02:19:21.078 [DEBUG] Audio chunk ready (system) size=384058
+2025-12-06 02:19:21.605 [INFO] STT chunk received:  Welcome to the first step.
+2025-12-06 02:19:22.071 [DEBUG] Audio chunk ready (system) size=384058
+2025-12-06 02:19:22.596 [INFO] STT chunk received:  episode of our new series.
+2025-12-06 02:19:23.130 [DEBUG] Audio chunk ready (system) size=403258
+2025-12-06 02:19:23.641 [INFO] STT chunk received:  huge come.
+2025-12-06 02:19:24.123 [DEBUG] Audio chunk ready (system) size=384058
+2025-12-06 02:19:24.654 [INFO] STT chunk received:  Conversations.
+2025-12-06 02:19:25.177 [DEBUG] Audio chunk ready (system) size=403258
+2025-12-06 02:19:26.171 [DEBUG] Audio chunk ready (system) size=384058
+2025-12-06 02:19:27.220 [DEBUG] Audio chunk ready (system) size=399418
+2025-12-06 02:19:28.212 [DEBUG] Audio chunk ready (system) size=384058
+2025-12-06 02:19:28.660 [INFO] Debounce triggered (Buffer). Sending: 'Conversation is...  Just try to figure out.  what that future.  really looks like.  to paint a picture.  of the future marks.  Zuckerberg is trying.  to build. So the  that you can decide for yourself.  what you think of it.  Welcome to the first step.  episode of our new series.  huge come.  Conversations.'
+2025-12-06 02:19:29.261 [DEBUG] Audio chunk ready (system) size=403258
+2025-12-06 02:19:29.735 [INFO] BraveChatController: message sent.
+2025-12-06 02:19:29.735 [INFO] Sent to ChatGPT via Brave.
+2025-12-06 02:19:30.318 [DEBUG] Audio chunk ready (system) size=403258
+2025-12-06 02:19:31.362 [DEBUG] Audio chunk ready (system) size=403258
+2025-12-06 02:19:32.410 [DEBUG] Audio chunk ready (system) size=403258
+2025-12-06 02:19:33.467 [DEBUG] Audio chunk ready (system) size=403258
+2025-12-06 02:19:53.721 [INFO] Capture stopped by user
+2025-12-06 02:19:56.593 [INFO] Application shutting down

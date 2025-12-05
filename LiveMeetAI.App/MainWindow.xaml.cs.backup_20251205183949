@@ -1,0 +1,376 @@
+﻿using System;
+using LiveMeetAI.AI;
+using System.Threading.Tasks;
+using LiveMeetAI.AI;
+using System.Windows.Interop;
+using LiveMeetAI.Audio;
+using LiveMeetAI.STT;
+using LiveMeetAI.Core;
+using Newtonsoft.Json.Linq;
+
+namespace LiveMeetAI.App
+{
+    public partial class MainWindow : Window
+    {
+        // Core components
+        private AudioCaptureService? audioService;
+        private ITranscriptionService? stt;
+        private TranscriptManager transcriptManager;
+        private BraveChatController? braveController;
+        private HotkeyManager? hotkeyManager;
+
+        // state
+        private bool isSystemRunning = false;
+        private bool isMicRunning = false;
+
+        // debounce
+        private DateTime lastSpeechChunkTime = DateTime.MinValue;
+        private string lastSentText = string.Empty;
+        private readonly TimeSpan chunkDebounce = TimeSpan.FromSeconds(2);
+        private readonly int minimumCharactersToSend = 20;
+
+        public MainWindow()
+        {
+            InitializeComponent();
+
+            FileLogger.Info("Application starting");
+
+            transcriptManager = new TranscriptManager();
+            FileLogger.Debug("TranscriptManager created");
+
+            // Load settings.json if present
+            var settingsPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "settings.json");
+            JObject? settings = null;
+            if (File.Exists(settingsPath))
+            {
+                try
+                {
+                    settings = JObject.Parse(File.ReadAllText(settingsPath));
+                }
+                catch (Exception ex)
+                {
+                    FileLogger.Error("Failed to parse settings.json: " + ex.Message);
+                }
+            }
+            else
+            {
+                FileLogger.Warn("settings.json not found; configure it to enable STT and Brave features.");
+            }
+
+            // Configure STT
+            if (settings != null)
+            {
+                var provider = settings.Value<string>("TranscriptionProvider") ?? "Local";
+                var localEndpoint = settings.Value<string>("LocalTranscriptionEndpoint") ?? "http://127.0.0.1:8080/inference";
+                var apiKey = settings.Value<string>("OpenAIApiKey");
+
+                try
+                {
+                    if (provider.Equals("Local", StringComparison.OrdinalIgnoreCase))
+                    {
+                        stt = new LocalWhisperTranscriptionService(localEndpoint);
+                        stt.OnTranscriptChunk += OnTranscriptChunk;
+                        FileLogger.Info("Local STT configured: " + localEndpoint);
+                    }
+                    else
+                    {
+                        FileLogger.Warn("TranscriptionProvider not recognized; STT disabled.");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    FileLogger.Error("Failed to initialize STT: " + ex.Message);
+                }
+
+                // Brave controller config
+                var bravePath = settings.Value<string>("BravePath");
+                var braveUserData = settings.Value<string>("BraveUserDataDir");
+                var chromedriverDir = settings.Value<string>("ChromeDriverDirectory");
+
+                if (!string.IsNullOrWhiteSpace(bravePath) && !string.IsNullOrWhiteSpace(braveUserData))
+                {
+                    try
+                    {
+                        braveController = new BraveChatController(bravePath, braveUserData, chromedriverDir);
+                        FileLogger.Info("Brave controller configured.");
+                    }
+                    catch (Exception ex)
+                    {
+                        FileLogger.Error("Failed to initialize Brave controller: " + ex.Message);
+                    }
+                }
+            }
+
+            Loaded += MainWindow_Loaded;
+            Closing += MainWindow_Closing;
+        }
+
+        private void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var helper = new WindowInteropHelper(this);
+                hotkeyManager = new HotkeyManager(helper.Handle);
+
+                const uint MOD_CTRL = 0x0002;
+                const uint MOD_SHIFT = 0x0004;
+                const uint VK_S = 0x53; // 'S'
+                const uint VK_M = 0x4D; // 'M'
+                const uint VK_P = 0x50; // 'P'
+
+                // register - map ids 1,2,3
+                hotkeyManager.RegisterHotKey(MOD_CTRL | MOD_SHIFT, VK_S); // id = 1
+                hotkeyManager.RegisterHotKey(MOD_CTRL | MOD_SHIFT, VK_M); // id = 2
+                hotkeyManager.RegisterHotKey(MOD_CTRL | MOD_SHIFT, VK_P); // id = 3
+
+                hotkeyManager.HotKeyPressed += id =>
+                {
+                    FileLogger.Debug("Hotkey pressed id=" + id);
+                    // map the ids 1,2 to start system/mic capture
+                    if (id == 1)
+                    {
+                        Dispatcher.Invoke(() => StartSystem_Click(null, null));
+                    }
+                    else if (id == 2)
+                    {
+                        Dispatcher.Invoke(() => StartMic_Click(null, null));
+                    }
+                    else if (id == 3)
+                    {
+                        Dispatcher.Invoke(() => Stop_Click(null, null));
+                    }
+                };
+
+                FileLogger.Info("Hotkeys registered");
+            }
+            catch (Exception ex)
+            {
+                FileLogger.Warn("Hotkey setup failed: " + ex.Message);
+            }
+        }
+
+        private void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            try
+            {
+                audioService?.Dispose();
+                stt = null;
+                braveController?.Dispose();
+                hotkeyManager?.Dispose();
+                FileLogger.Info("Application shutting down");
+            }
+            catch (Exception ex)
+            {
+                FileLogger.Error("Error during shutdown: " + ex.Message);
+            }
+        }
+
+        private void OnTranscriptChunk(string text)
+        {
+            try
+            {
+                if (string.IsNullOrWhiteSpace(text)) return;
+
+                transcriptManager.Add(text);
+                FileLogger.Info("STT chunk received: " + (text.Length > 200 ? text.Substring(0, 200) + "..." : text));
+
+                Dispatcher.Invoke(() =>
+                {
+                    TranscriptBox?.AppendText($"{DateTime.Now:HH:mm:ss}  {text}\n");
+                    TranscriptBox?.ScrollToEnd();
+                });
+
+                lastSpeechChunkTime = DateTime.Now;
+                lastSentText = text;
+
+                Task.Run(async () =>
+                {
+                    await Task.Delay(chunkDebounce);
+                    if ((DateTime.Now - lastSpeechChunkTime) >= chunkDebounce)
+                    {
+                        var candidate = lastSentText?.Trim();
+                        if (!string.IsNullOrEmpty(candidate) && candidate.Length >= minimumCharactersToSend)
+                        {
+                            bool seemsComplete = candidate.EndsWith(".") || candidate.EndsWith("?") || candidate.EndsWith("!");
+                            if (seemsComplete || candidate.Length > 120)
+                            {
+                                TrySendToBraveChat(candidate);
+                            }
+                        }
+                    }
+                });
+            }
+            catch (Exception ex)
+            {
+                FileLogger.Error("OnTranscriptChunk failed: " + ex.Message);
+            }
+        }
+
+        private void TrySendToBraveChat(string message)
+        {
+            if (string.IsNullOrWhiteSpace(message)) return;
+            if (braveController == null)
+            {
+                FileLogger.Warn("Brave controller not configured.");
+                Dispatcher.Invoke(() =>
+                {
+                    AiBox?.AppendText($"(Brave disabled) Would send: {message}\n\n");
+                    AiBox?.ScrollToEnd();
+                });
+                return;
+            }
+
+            Task.Run(() =>
+            {
+                try
+                {
+                    braveController.SendMessageToChatGpt(message);
+                    FileLogger.Info("Sent to ChatGPT via Brave.");
+                    Dispatcher.Invoke(() =>
+                    {
+                        AiBox?.AppendText($"Sent to ChatGPT: {message}\n\n");
+                        AiBox?.ScrollToEnd();
+                    });
+                }
+                catch (Exception ex)
+                {
+                    FileLogger.Error("TrySendToBraveChat failed: " + ex.Message);
+                    Dispatcher.Invoke(() =>
+                    {
+                        AiBox?.AppendText($"Failed sending to ChatGPT: {ex.Message}\n\n");
+                        AiBox?.ScrollToEnd();
+                    });
+                }
+            });
+        }
+
+        // UI handlers
+        private void StartSystem_Click(object sender, RoutedEventArgs? e)
+        {
+            try
+            {
+                if (isSystemRunning)
+                {
+                    audioService?.Stop();
+                    isSystemRunning = false;
+                    AiBox?.AppendText("Stopped system capture\n");
+                    FileLogger.Info("Stopped system capture");
+                    return;
+                }
+
+                audioService = new AudioCaptureService();
+                audioService.OnChunkReady += async (s, args) =>
+                {
+                    FileLogger.Debug("Audio chunk ready (system) size=" + (args.WavBytes?.Length ?? 0));
+                    if (stt != null)
+                    {
+                        try
+                        {
+                            await stt.TranscribeChunkAsync(args.WavBytes);
+                        }
+                        catch (Exception ex)
+                        {
+                            FileLogger.Error("STT error: " + ex.Message);
+                        }
+                    }
+                };
+
+                audioService.Start(CaptureSource.SystemLoopback);
+                isSystemRunning = true;
+                AiBox?.AppendText("Started system capture\n");
+                FileLogger.Info("Started system capture");
+            }
+            catch (Exception ex)
+            {
+                FileLogger.Error("StartSystem_Click failed: " + ex.Message);
+                MessageBox.Show("Failed to start system capture: " + ex.Message);
+            }
+        }
+
+        private void StartMic_Click(object sender, RoutedEventArgs? e)
+        {
+            try
+            {
+                if (isMicRunning)
+                {
+                    audioService?.Stop();
+                    isMicRunning = false;
+                    AiBox?.AppendText("Stopped mic capture\n");
+                    FileLogger.Info("Stopped mic capture");
+                    return;
+                }
+
+                audioService = new AudioCaptureService();
+                audioService.OnChunkReady += async (s, args) =>
+                {
+                    FileLogger.Debug("Audio chunk ready (mic) size=" + (args.WavBytes?.Length ?? 0));
+                    if (stt != null)
+                    {
+                        try
+                        {
+                            await stt.TranscribeChunkAsync(args.WavBytes);
+                        }
+                        catch (Exception ex)
+                        {
+                            FileLogger.Error("STT error: " + ex.Message);
+                        }
+                    }
+                };
+
+                audioService.Start(CaptureSource.Microphone);
+                isMicRunning = true;
+                AiBox?.AppendText("Started microphone capture\n");
+                FileLogger.Info("Started microphone capture");
+            }
+            catch (Exception ex)
+            {
+                FileLogger.Error("StartMic_Click failed: " + ex.Message);
+                MessageBox.Show("Failed to start mic capture: " + ex.Message);
+            }
+        }
+
+        private void Stop_Click(object sender, RoutedEventArgs? e)
+        {
+            try
+            {
+                audioService?.Stop();
+                isMicRunning = isSystemRunning = false;
+                AiBox?.AppendText("Capture stopped\n");
+                FileLogger.Info("Capture stopped by user");
+            }
+            catch (Exception ex)
+            {
+                FileLogger.Error("Stop_Click failed: " + ex.Message);
+                MessageBox.Show("Failed to stop: " + ex.Message);
+            }
+        }
+
+        private async void Ask_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var q = AskBox.Text?.Trim();
+                if (string.IsNullOrEmpty(q)) return;
+
+                if (braveController != null)
+                {
+                    await Task.Run(() => braveController.SendMessageToChatGpt(q));
+                    AiBox?.AppendText($"Q: {q}\nSent to ChatGPT\n\n");
+                }
+                else
+                {
+                    AiBox?.AppendText($"Q: {q}\nNo Brave controller configured.\n\n");
+                }
+
+                AskBox.Clear();
+            }
+            catch (Exception ex)
+            {
+                FileLogger.Error("Ask_Click failed: " + ex.Message);
+                MessageBox.Show("Ask failed: " + ex.Message);
+            }
+        }
+    }
+}
+
+
