@@ -33,3 +33,4 @@ C:\Users\pc\Documents\GitHub\livemeet_ai\LiveMeetAI.App\obj\Debug\net7.0-windows
 C:\Users\pc\Documents\GitHub\livemeet_ai\LiveMeetAI.App\obj\Debug\net7.0-windows\LiveMeetAI.App.pdb
 C:\Users\pc\Documents\GitHub\livemeet_ai\LiveMeetAI.App\obj\Debug\net7.0-windows\LiveMeetAI.App.genruntimeconfig.cache
 C:\Users\pc\Documents\GitHub\livemeet_ai\LiveMeetAI.App\obj\Debug\net7.0-windows\ref\LiveMeetAI.App.dll
+C:\Users\pc\Documents\GitHub\livemeet_ai\LiveMeetAI.App\obj\Debug\net7.0-windows\LiveMeetAI.App.sourcelink.json

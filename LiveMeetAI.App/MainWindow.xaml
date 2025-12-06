@@ -15,6 +15,7 @@
         <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="0,8,0,0">
             <TextBlock VerticalAlignment="Center" Text="Ask (manual):" Margin="0,0,6,0"/>
             <TextBox x:Name="AskBox" Width="500" />
+            <Button Content="Open Browser" Click="OpenBrowser_Click" Margin="6,0,0,0"/>
             <Button Content="Ask" Click="Ask_Click" Margin="6,0,0,0"/>
             <Button Content="Start System" Click="StartSystem_Click" Margin="6,0,0,0"/>
             <Button Content="Start Mic" Click="StartMic_Click" Margin="6,0,0,0"/>

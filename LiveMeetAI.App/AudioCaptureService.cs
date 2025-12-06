@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using NAudio.Wave;
 using System.Threading;
+using LiveMeetAI.App;
 
 namespace LiveMeetAI.Audio
 {
@@ -27,13 +28,29 @@ namespace LiveMeetAI.Audio
         private readonly object lockObj = new object();
 
         // choose chunk length (ms)
-        // reduce from 2000 -> 1000 (milliseconds)
-        private const int ChunkMilliseconds = 1000;
+        // Increase to 3000ms (3s) to prevent splitting short sentences.
+        private const int ChunkMilliseconds = 3000;
 
 
         public void Start(CaptureSource source)
         {
             Stop();
+
+            // Log available devices to help debug Bluetooth issues
+            try
+            {
+                int deviceCount = WaveIn.DeviceCount;
+                FileLogger.Info($"AudioCaptureService: Found {deviceCount} recording devices.");
+                for (int i = 0; i < deviceCount; i++)
+                {
+                    var caps = WaveIn.GetCapabilities(i);
+                    FileLogger.Info($"  Device {i}: {caps.ProductName} (Channels: {caps.Channels})");
+                }
+            }
+            catch (Exception ex)
+            {
+                FileLogger.Warn($"AudioCaptureService: Failed to list devices: {ex.Message}");
+            }
 
             if (source == CaptureSource.SystemLoopback)
             {
@@ -44,13 +61,40 @@ namespace LiveMeetAI.Audio
             }
             else
             {
+                // Find best device (User prefers 'realme')
+                int targetDeviceIndex = 0;
+                string targetDeviceName = "Default (0)";
+
+                for (int i = 0; i < WaveIn.DeviceCount; i++)
+                {
+                    var caps = WaveIn.GetCapabilities(i);
+                    // Match "realme" case-insensitive
+                    if (caps.ProductName.IndexOf("realme", StringComparison.OrdinalIgnoreCase) >= 0)
+                    {
+                        targetDeviceIndex = i;
+                        targetDeviceName = caps.ProductName;
+                        break;
+                    }
+                }
+
+                var selectedCaps = WaveIn.GetCapabilities(targetDeviceIndex);
+                int channels = selectedCaps.Channels;
+                if (channels < 1) channels = 1; // safety
+
+                FileLogger.Info($"AudioCaptureService: Selected Microphone: '{targetDeviceName}' (Device {targetDeviceIndex}) - Channels: {channels}");
+
                 waveIn = new WaveInEvent
                 {
-                    WaveFormat = new WaveFormat(16000, 16, 1), // 16k mono - adjust if needed
+                    DeviceNumber = targetDeviceIndex, 
+                    // Use 44.1kHz. Use device's native channel count to avoid mismatch artifacts.
+                    WaveFormat = new WaveFormat(44100, 16, channels), 
                     BufferMilliseconds = 200
                 };
+                
+                FileLogger.Info($"AudioCaptureService: Configured WaveFormat: {waveIn.WaveFormat}");
                 SetUpWriter(waveIn.WaveFormat);
                 waveIn.DataAvailable += WaveIn_DataAvailable;
+                waveIn.RecordingStopped += (s, a) => FileLogger.Info("AudioCaptureService: Microphone recording stopped.");
                 waveIn.StartRecording();
             }
         }
@@ -87,47 +131,51 @@ namespace LiveMeetAI.Audio
                 // If buffer length exceeds chunk threshold, emit chunk
                 if (bufferStream.Length >= writer.WaveFormat.AverageBytesPerSecond * ChunkMilliseconds / 1000)
                 {
-                    var format = writer.WaveFormat;
-
-                    // finalize writer to write proper WAV headers
-                    writer.Flush();
-                    writer.Dispose();
-
-                    // copy bytes (complete WAV)
-                    byte[] bytes;
-                    try
-                    {
-                        bytes = bufferStream.ToArray();
-                    }
-                    catch
-                    {
-                        bytes = Array.Empty<byte>();
-                    }
-
-                    // reset stream & writer
-                    bufferStream.Dispose();
-                    bufferStream = new MemoryStream();
-                    writer = new WaveFileWriter(new IgnoreDisposeStream(bufferStream), format);
-                    try
-                    {
-                        var debugDir = @"C:\Temp\LiveMeetAI_chunks";
-                        Directory.CreateDirectory(debugDir);
-                        var fname = Path.Combine(debugDir, $"chunk_{DateTime.Now:yyyyMMdd_HHmmss_fff}.wav");
-                        File.WriteAllBytes(fname, bytes);
-                    }
-                    catch { /* ignore debug errors */ }
-                    // send on background thread
-                    ThreadPool.QueueUserWorkItem(_ =>
-                    {
-                        try
-                        {
-                            OnChunkReady?.Invoke(this, new AudioChunkEventArgs { WavBytes = bytes });
-                        }
-                        catch { /* swallow */ }
-                    });
+                    FlushAndEmit();
                 }
             }
         }
+
+        private void FlushAndEmit()
+        {
+            if (writer == null || bufferStream == null) return;
+            var format = writer.WaveFormat;
+
+            // finalize writer to write proper WAV headers
+            writer.Flush();
+            writer.Dispose();
+
+            // copy bytes (complete WAV)
+            byte[] bytes;
+            try
+            {
+                bytes = bufferStream.ToArray();
+            }
+            catch
+            {
+                bytes = Array.Empty<byte>();
+            }
+
+            // reset stream & writer
+            bufferStream.Dispose();
+            bufferStream = new MemoryStream();
+            writer = new WaveFileWriter(new IgnoreDisposeStream(bufferStream), format);
+            try
+            {
+                var debugDir = @"C:\Temp\LiveMeetAI_chunks";
+                Directory.CreateDirectory(debugDir);
+                var fname = Path.Combine(debugDir, $"chunk_{DateTime.Now:yyyyMMdd_HHmmss_fff}.wav");
+                File.WriteAllBytes(fname, bytes);
+            }
+            catch { /* ignore debug errors */ }
+            // send synchronously so we can track pending requests
+            try
+            {
+                OnChunkReady?.Invoke(this, new AudioChunkEventArgs { WavBytes = bytes });
+            }
+            catch { /* swallow */ }
+        }
+
         public void Stop()
         {
             try
@@ -148,6 +196,9 @@ namespace LiveMeetAI.Audio
 
             lock (lockObj)
             {
+                // Flush any remaining audio in the buffer so we don't lose the last word
+                FlushAndEmit();
+
                 writer?.Dispose();
                 writer = null;
                 bufferStream?.Dispose();
