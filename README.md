@@ -4,12 +4,20 @@ A powerful real-time AI transcription and meeting assistant that captures system
 
 ## 🚀 Features
 
-*   **Real-time Transcription**: Uses OpenAI's Whisper model (running locally via Python) to transcribe system and microphone audio.
+### Core
+*   **Real-time Transcription**: Uses OpenAI's **Whisper Small** model (running locally via Python) for high-accuracy English transcription.
 *   **ChatGPT Integration**: Automatically sends transcribed text to ChatGPT via a controlled **Brave Browser** instance.
-*   **Smart buffering**: Aggregates speech into complete sentences before sending to avoid spamming the AI.
-*   **Robust Error Handling**: Filters out technical logs and errors, ensuring only clean text reaches the AI.
-*   **Resilient Connectivity**: auto-attaches to an existing Brave window if open, preserving your login session.
-*   **Hotkeys**: Global keyboard shortcuts to control capture.
+*   **Stereo Capture**: Natively supports modern Bluetooth headsets (like realme Buds) in 2-channel mode to prevent audio corruption.
+
+### Smart Automation ("Stealth Mode")
+*   **Cloudflare Evasion**: Uses advanced Selenium flags (masked User-Agent, disabled automation features) to bypass "Verify you are human" checks.
+*   **Natural Interactions**: Browser launches in a standard tab configuration to mimic human behavior.
+*   **Resilient Connectivity**: Auto-attaches to an existing Brave window if open, preserving your logic session.
+
+### Intelligent Processing
+*   **Message Aggregation**: Waits for the final part of your sentence (e.g., "...in Dart") to be transcribed before sending, ensuring ChatGPT gets ONE complete context.
+*   **Silence Detection**: RMS-based filtering allows the AI to ignore background static and only process voice.
+*   **Flush-on-Stop**: Guarantees the last 3 seconds of audio are sent immediately when you release the hotkey.
 
 ## 📋 Prerequisites
 
@@ -27,9 +35,9 @@ The project uses a local Python server for transcription to avoid API costs and 
 
 ```bash
 # In the root 'livemeet_ai' folder
-pip install flask openai-whisper
+pip install flask openai-whisper numpy
 ```
-*Note: You may also need to install `torch` manually if `openai-whisper` doesn't pull the correct version for your hardware.*
+*Note: The first run will download the 'small' model (~500MB).*
 
 ### 2. Setup the C# Application
 
@@ -68,31 +76,32 @@ dotnet run
 | `Ctrl + Shift + P` | **Stop / Pause** Capture |
 
 1.  Launch the app (`dotnet run`).
-2.  It will automatically open **Brave Browser** and navigate to ChatGPT.
-3.  **Log in** to ChatGPT if prompted. (The app waits for you).
-4.  Press `Ctrl + Shift + S` to start capturing your meeting audio.
-5.  Watch ChatGPT analyze the conversation in real-time!
+2.  It will open **Brave Browser** in "Stealth Mode".
+3.  **Log in** to ChatGPT if prompted.
+    *   *Note: If a CAPTCHA appears, the app waits **60 seconds** for you to solve it.*
+4.  Press `Ctrl + Shift + M` to talk.
+5.  Release the keys when done. The app will wait for the final word, aggregate the sentence, and send it to ChatGPT.
 
 ## 🔧 Troubleshooting
 
-### "No connection could be made..."
-*   **Cause**: The Python server is not running or crashed.
-*   **Fix**: Check Terminal 1. If it crashed, restart `python whisper_server.py`.
-
 ### "Verify you are human" / Cloudflare Loop
 *   **Cause**: Automated browser detection.
-*   **Fix**: The app uses a "Remote Debugging" pattern to minimize this. If it happens, just solve the CAPTCHA manually. The app will wait. **Do not close the browser**; just solve it.
+*   **Fix**: The app uses "Stealth Mode" (User-Agent spoofing) to minimize this.
+*   **Solution**: **Log In** to ChatGPT. Cloudflare trusts logged-in users more than anonymous ones.
 
-### Double Browser Windows
-*   **Fix**: If you already have Brave open with the specialized port (9222), the app will attach to it. If you have "normal" Brave open, it may launch a separate instance. Ideally, close all Brave windows before starting the app to ensure a clean session.
+### "No connection could be made..."
+*   **Fix**: Check Terminal 1. If the Python server crashed, restart `python whisper_server.py`.
+
+### "Cut off words"
+*   **Fixed**: The app now flushes the audio buffer separately when you stop recording. Ensure you are running the latest version.
 
 ## 📁 Project Structure
 
-*   `whisper_server.py`: The Python STT engine.
-*   `LiveMeetAI.App/`: Main C# Application source.
-    *   `BraveChatController.cs`: Handles ChatGPT interaction.
-    *   `LocalWhisperTranscriptionService.cs`: Sends audio to the Python server.
-    *   `AudioCaptureService.cs`: Captures system/mic audio.
+*   `whisper_server.py`: The Python STT engine (Flask + Whisper).
+*   `LiveMeetAI.App/`: Main C# Application.
+    *   `BraveChatController.cs`: Handles Selenium automation & Stealth Mode.
+    *   `AudioCaptureService.cs`: NAudio capture, Stereo handling, & Buffer flushing.
+    *   `MainWindow.xaml.cs`: UI & Hotkey logic.
 
 ## 🛡️ Privacy
-All transcription is done **locally** on your machine using Whisper. No audio is sent to the cloud (except the text sent to ChatGPT for processing).
+All transcription is done **locally** on your machine using Whisper. No audio is sent to the cloud. Only the final text is sent to ChatGPT for analysis.
