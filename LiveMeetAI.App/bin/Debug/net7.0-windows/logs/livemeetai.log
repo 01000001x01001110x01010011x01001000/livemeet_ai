@@ -219,3 +219,211 @@
 2025-12-06 22:06:35.372 [INFO] BraveChatController: message sent.
 2025-12-06 22:06:35.372 [INFO] Sent to ChatGPT via Brave.
 2025-12-06 22:07:23.764 [INFO] Application shutting down
+2025-12-09 15:41:35.583 [INFO] Application starting
+2025-12-09 15:41:35.586 [DEBUG] TranscriptManager created
+2025-12-09 15:41:35.595 [INFO] Local STT configured: http://127.0.0.1:8080/inference
+2025-12-09 15:41:35.595 [INFO] MainWindow: BravePath=C:\Program Files\BraveSoftware\Brave-Browser\Application\brave.exe
+2025-12-09 15:41:35.595 [INFO] MainWindow: UserDataDir=C:\Users\pc\AppData\Local\BraveSoftware\Brave-Browser\User Data\LiveMeetProfile
+2025-12-09 15:41:35.595 [INFO] MainWindow: ChromeDriverDir=C:\Users\pc\.nuget\packages\selenium.webdriver.chromedriver\143.0.7499.4000\driver\win32
+2025-12-09 15:41:35.595 [INFO] Brave controller configured.
+2025-12-09 15:41:35.595 [INFO] TEST: forcing Brave startup for diagnostics...
+2025-12-09 15:41:35.786 [INFO] BraveChatController: using configured ChromeDriverDir: C:\Users\pc\.nuget\packages\selenium.webdriver.chromedriver\143.0.7499.4000\driver\win32
+2025-12-09 15:41:36.301 [INFO] BraveChatController: Launching Brave process manually: C:\Program Files\BraveSoftware\Brave-Browser\Application\brave.exe --remote-debugging-port=9222 --user-data-dir="C:\Users\pc\AppData\Local\BraveSoftware\Brave-Browser\User Data\LiveMeetProfile" --disable-blink-features=AutomationControlled --user-agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36" "https://chatgpt.com/?temporary-chat=true"
+2025-12-09 15:41:40.027 [INFO] BraveChatController: Connected to Brave via remote debugging.
+2025-12-09 15:41:41.769 [INFO] BraveChatController: Enabling Temporary Chat...
+2025-12-09 15:41:41.771 [INFO] BraveChatController: Enabling Temporary Chat via URL navigation...
+2025-12-09 15:41:44.686 [INFO] BraveChatController: Ready to chat.
+2025-12-09 15:41:44.686 [INFO] TEST: EnsureWindowStarted() returned without exception.
+2025-12-09 15:41:45.619 [INFO] Hotkeys registered
+2025-12-09 15:41:59.608 [INFO] BraveChatController: message sent.
+2025-12-09 16:53:03.539 [INFO] AudioCaptureService: Found 6 recording devices.
+2025-12-09 16:53:03.540 [INFO]   Device 0: Microphone (NVIDIA Broadcast) (Channels: 2)
+2025-12-09 16:53:03.541 [INFO]   Device 1: Microphone (HD video  ) (Channels: 2)
+2025-12-09 16:53:03.541 [INFO]   Device 2: Microphone (HyperX Cloud III) (Channels: 2)
+2025-12-09 16:53:03.541 [INFO]   Device 3: Headset (realme Buds T310) (Channels: 2)
+2025-12-09 16:53:03.541 [INFO]   Device 4: Stereo Mix (Realtek(R) Audio) (Channels: 2)
+2025-12-09 16:53:03.541 [INFO]   Device 5: Microphone (Camo) (Channels: 2)
+2025-12-09 16:53:03.542 [INFO] AudioCaptureService: Selected Microphone: 'Headset (realme Buds T310)' (Device 3) - Channels: 2
+2025-12-09 16:53:03.542 [INFO] AudioCaptureService: Configured WaveFormat: 16 bit PCM: 44100Hz 2 channels
+2025-12-09 16:53:03.558 [INFO] Started microphone capture
+2025-12-09 16:53:05.380 [INFO] Capture stopped
+2025-12-09 16:53:05.380 [INFO] AudioCaptureService: Microphone recording stopped.
+2025-12-09 16:53:18.478 [INFO] AudioCaptureService: Found 6 recording devices.
+2025-12-09 16:53:18.479 [INFO]   Device 0: Microphone (NVIDIA Broadcast) (Channels: 2)
+2025-12-09 16:53:18.479 [INFO]   Device 1: Microphone (HD video  ) (Channels: 2)
+2025-12-09 16:53:18.479 [INFO]   Device 2: Microphone (HyperX Cloud III) (Channels: 2)
+2025-12-09 16:53:18.479 [INFO]   Device 3: Headset (realme Buds T310) (Channels: 2)
+2025-12-09 16:53:18.479 [INFO]   Device 4: Stereo Mix (Realtek(R) Audio) (Channels: 2)
+2025-12-09 16:53:18.479 [INFO]   Device 5: Microphone (Camo) (Channels: 2)
+2025-12-09 16:53:18.480 [INFO] AudioCaptureService: Selected Microphone: 'Headset (realme Buds T310)' (Device 3) - Channels: 2
+2025-12-09 16:53:18.480 [INFO] AudioCaptureService: Configured WaveFormat: 16 bit PCM: 44100Hz 2 channels
+2025-12-09 16:53:18.486 [INFO] Started microphone capture
+2025-12-09 16:53:20.500 [INFO] Capture stopped
+2025-12-09 16:53:20.500 [INFO] AudioCaptureService: Microphone recording stopped.
+2025-12-09 16:53:23.295 [INFO] STT chunk received:  Flutter.
+2025-12-09 16:53:23.315 [INFO] Flush triggered. Sending: 'Flutter.'
+2025-12-09 16:53:23.958 [INFO] BraveChatController: message sent.
+2025-12-09 16:53:23.958 [INFO] Sent to ChatGPT via Brave.
+2025-12-09 16:53:39.269 [INFO] AudioCaptureService: Found 6 recording devices.
+2025-12-09 16:53:39.270 [INFO]   Device 0: Microphone (NVIDIA Broadcast) (Channels: 2)
+2025-12-09 16:53:39.270 [INFO]   Device 1: Microphone (HD video  ) (Channels: 2)
+2025-12-09 16:53:39.270 [INFO]   Device 2: Microphone (HyperX Cloud III) (Channels: 2)
+2025-12-09 16:53:39.270 [INFO]   Device 3: Headset (realme Buds T310) (Channels: 2)
+2025-12-09 16:53:39.271 [INFO]   Device 4: Stereo Mix (Realtek(R) Audio) (Channels: 2)
+2025-12-09 16:53:39.271 [INFO]   Device 5: Microphone (Camo) (Channels: 2)
+2025-12-09 16:53:39.271 [INFO] AudioCaptureService: Selected Microphone: 'Headset (realme Buds T310)' (Device 3) - Channels: 2
+2025-12-09 16:53:39.271 [INFO] AudioCaptureService: Configured WaveFormat: 16 bit PCM: 44100Hz 2 channels
+2025-12-09 16:53:39.277 [INFO] Started microphone capture
+2025-12-09 16:53:45.659 [INFO] STT chunk received:  These are there in Android like.
+2025-12-09 16:53:50.941 [INFO] Capture stopped
+2025-12-09 16:53:50.942 [INFO] AudioCaptureService: Microphone recording stopped.
+2025-12-09 16:53:55.958 [WARN] StopAll: Timeout waiting for pending STT.
+2025-12-09 16:53:55.958 [INFO] Flush triggered. Sending: 'These are there in Android like.'
+2025-12-09 16:53:56.629 [INFO] BraveChatController: message sent.
+2025-12-09 16:53:56.629 [INFO] Sent to ChatGPT via Brave.
+2025-12-09 16:53:57.394 [INFO] STT chunk received:  So, I'm going to take a little bit of a little bi...
+2025-12-09 16:53:59.542 [INFO] STT chunk received:  So, manager, program, service, background, servic...
+2025-12-09 16:54:03.553 [INFO] Debounce triggered (Buffer). Sending: 'So, I'm going to take a little bit of a little bit of a little bit of a little bit of a little bit of a little bit of a little bit of a little bit of a little bit of a little bit of a little bit of a little bit of a little bit of a little bit of a little bit of a little bit of a little bit of a little bit of a little bit of a little bit of a little bit of a little bit of a little bit of a little bit of a little bit of a little bit of a little bit of a little bit of a little bit of a little bit of a little bit of a little bit of a little bit of a little bit of a little bit of a little bit of a little bit of a little bit of a little bit of a little bit of a little bit of a little bit of a little bit of a little bit of a little bit of a little bit of a little bit of a little bit of a little bit of a little bit of a little bit of a little bit of a little bit of a little bit of  So, manager, program, service, background, service.'
+2025-12-09 16:54:04.773 [INFO] BraveChatController: message sent.
+2025-12-09 16:54:04.773 [INFO] Sent to ChatGPT via Brave.
+2025-12-09 16:54:16.960 [INFO] AudioCaptureService: Found 6 recording devices.
+2025-12-09 16:54:16.961 [INFO]   Device 0: Microphone (NVIDIA Broadcast) (Channels: 2)
+2025-12-09 16:54:16.961 [INFO]   Device 1: Microphone (HD video  ) (Channels: 2)
+2025-12-09 16:54:16.961 [INFO]   Device 2: Microphone (HyperX Cloud III) (Channels: 2)
+2025-12-09 16:54:16.961 [INFO]   Device 3: Headset (realme Buds T310) (Channels: 2)
+2025-12-09 16:54:16.962 [INFO]   Device 4: Stereo Mix (Realtek(R) Audio) (Channels: 2)
+2025-12-09 16:54:16.962 [INFO]   Device 5: Microphone (Camo) (Channels: 2)
+2025-12-09 16:54:16.962 [INFO] AudioCaptureService: Selected Microphone: 'Headset (realme Buds T310)' (Device 3) - Channels: 2
+2025-12-09 16:54:16.962 [INFO] AudioCaptureService: Configured WaveFormat: 16 bit PCM: 44100Hz 2 channels
+2025-12-09 16:54:16.967 [INFO] Started microphone capture
+2025-12-09 16:54:20.324 [INFO] Capture stopped
+2025-12-09 16:54:20.325 [INFO] AudioCaptureService: Microphone recording stopped.
+2025-12-09 16:54:22.185 [INFO] STT chunk received:  Any services are there.
+2025-12-09 16:54:22.194 [INFO] Flush triggered. Sending: 'Any services are there.'
+2025-12-09 16:54:22.848 [INFO] BraveChatController: message sent.
+2025-12-09 16:54:22.849 [INFO] Sent to ChatGPT via Brave.
+2025-12-09 17:00:11.819 [INFO] AudioCaptureService: Found 6 recording devices.
+2025-12-09 17:00:11.820 [INFO]   Device 0: Microphone (NVIDIA Broadcast) (Channels: 2)
+2025-12-09 17:00:11.820 [INFO]   Device 1: Microphone (HD video  ) (Channels: 2)
+2025-12-09 17:00:11.820 [INFO]   Device 2: Microphone (HyperX Cloud III) (Channels: 2)
+2025-12-09 17:00:11.820 [INFO]   Device 3: Headset (realme Buds T310) (Channels: 2)
+2025-12-09 17:00:11.820 [INFO]   Device 4: Stereo Mix (Realtek(R) Audio) (Channels: 2)
+2025-12-09 17:00:11.820 [INFO]   Device 5: Microphone (Camo) (Channels: 2)
+2025-12-09 17:00:11.821 [INFO] AudioCaptureService: Selected Microphone: 'Headset (realme Buds T310)' (Device 3) - Channels: 2
+2025-12-09 17:00:11.821 [INFO] AudioCaptureService: Configured WaveFormat: 16 bit PCM: 44100Hz 2 channels
+2025-12-09 17:00:11.825 [INFO] Started microphone capture
+2025-12-09 17:00:16.522 [INFO] Capture stopped
+2025-12-09 17:00:16.522 [INFO] AudioCaptureService: Microphone recording stopped.
+2025-12-09 17:00:16.902 [INFO] STT chunk received:  What do you mean by stateful?
+2025-12-09 17:00:18.842 [INFO] STT chunk received:  Let's take versus dynamic data.
+2025-12-09 17:00:18.848 [INFO] Flush triggered. Sending: 'What do you mean by stateful?  Let's take versus dynamic data.'
+2025-12-09 17:00:19.607 [INFO] BraveChatController: message sent.
+2025-12-09 17:00:19.607 [INFO] Sent to ChatGPT via Brave.
+2025-12-09 17:00:30.181 [INFO] AudioCaptureService: Found 6 recording devices.
+2025-12-09 17:00:30.181 [INFO]   Device 0: Microphone (NVIDIA Broadcast) (Channels: 2)
+2025-12-09 17:00:30.182 [INFO]   Device 1: Microphone (HD video  ) (Channels: 2)
+2025-12-09 17:00:30.182 [INFO]   Device 2: Microphone (HyperX Cloud III) (Channels: 2)
+2025-12-09 17:00:30.182 [INFO]   Device 3: Headset (realme Buds T310) (Channels: 2)
+2025-12-09 17:00:30.182 [INFO]   Device 4: Stereo Mix (Realtek(R) Audio) (Channels: 2)
+2025-12-09 17:00:30.182 [INFO]   Device 5: Microphone (Camo) (Channels: 2)
+2025-12-09 17:00:30.183 [INFO] AudioCaptureService: Selected Microphone: 'Headset (realme Buds T310)' (Device 3) - Channels: 2
+2025-12-09 17:00:30.183 [INFO] AudioCaptureService: Configured WaveFormat: 16 bit PCM: 44100Hz 2 channels
+2025-12-09 17:00:30.186 [INFO] Started microphone capture
+2025-12-09 17:00:33.518 [INFO] Capture stopped
+2025-12-09 17:00:33.519 [INFO] AudioCaptureService: Microphone recording stopped.
+2025-12-09 17:00:35.254 [INFO] STT chunk received:  How to do multitasking in Flutter.
+2025-12-09 17:00:37.038 [INFO] STT chunk received:  Flutter.
+2025-12-09 17:00:37.057 [INFO] Flush triggered. Sending: 'How to do multitasking in Flutter.  Flutter.'
+2025-12-09 17:00:37.746 [INFO] BraveChatController: message sent.
+2025-12-09 17:00:37.746 [INFO] Sent to ChatGPT via Brave.
+2025-12-09 17:01:02.454 [INFO] AudioCaptureService: Found 6 recording devices.
+2025-12-09 17:01:02.454 [INFO]   Device 0: Microphone (NVIDIA Broadcast) (Channels: 2)
+2025-12-09 17:01:02.455 [INFO]   Device 1: Microphone (HD video  ) (Channels: 2)
+2025-12-09 17:01:02.455 [INFO]   Device 2: Microphone (HyperX Cloud III) (Channels: 2)
+2025-12-09 17:01:02.455 [INFO]   Device 3: Headset (realme Buds T310) (Channels: 2)
+2025-12-09 17:01:02.455 [INFO]   Device 4: Stereo Mix (Realtek(R) Audio) (Channels: 2)
+2025-12-09 17:01:02.455 [INFO]   Device 5: Microphone (Camo) (Channels: 2)
+2025-12-09 17:01:02.456 [INFO] AudioCaptureService: Selected Microphone: 'Headset (realme Buds T310)' (Device 3) - Channels: 2
+2025-12-09 17:01:02.456 [INFO] AudioCaptureService: Configured WaveFormat: 16 bit PCM: 44100Hz 2 channels
+2025-12-09 17:01:02.459 [INFO] Started microphone capture
+2025-12-09 17:01:07.512 [INFO] STT chunk received:  Which plugin is used to show notifications?
+2025-12-09 17:01:09.124 [INFO] Capture stopped
+2025-12-09 17:01:09.124 [INFO] AudioCaptureService: Microphone recording stopped.
+2025-12-09 17:01:10.654 [INFO] STT chunk received:  When the app is in foreground, in Flutter.
+2025-12-09 17:01:12.426 [INFO] STT chunk received:  Flutter.
+2025-12-09 17:01:12.458 [INFO] Flush triggered. Sending: 'Which plugin is used to show notifications?  When the app is in foreground, in Flutter.  Flutter.'
+2025-12-09 17:01:13.260 [INFO] BraveChatController: message sent.
+2025-12-09 17:01:13.260 [INFO] Sent to ChatGPT via Brave.
+2025-12-09 17:08:12.370 [INFO] AudioCaptureService: Found 6 recording devices.
+2025-12-09 17:08:12.370 [INFO]   Device 0: Microphone (NVIDIA Broadcast) (Channels: 2)
+2025-12-09 17:08:12.371 [INFO]   Device 1: Microphone (HD video  ) (Channels: 2)
+2025-12-09 17:08:12.371 [INFO]   Device 2: Microphone (HyperX Cloud III) (Channels: 2)
+2025-12-09 17:08:12.371 [INFO]   Device 3: Headset (realme Buds T310) (Channels: 2)
+2025-12-09 17:08:12.371 [INFO]   Device 4: Stereo Mix (Realtek(R) Audio) (Channels: 2)
+2025-12-09 17:08:12.371 [INFO]   Device 5: Microphone (Camo) (Channels: 2)
+2025-12-09 17:08:12.381 [INFO] Started system capture
+2025-12-09 17:08:15.187 [INFO] Capture stopped
+2025-12-09 17:08:31.311 [INFO] AudioCaptureService: Found 6 recording devices.
+2025-12-09 17:08:31.312 [INFO]   Device 0: Microphone (NVIDIA Broadcast) (Channels: 2)
+2025-12-09 17:08:31.312 [INFO]   Device 1: Microphone (HD video  ) (Channels: 2)
+2025-12-09 17:08:31.312 [INFO]   Device 2: Microphone (HyperX Cloud III) (Channels: 2)
+2025-12-09 17:08:31.312 [INFO]   Device 3: Headset (realme Buds T310) (Channels: 2)
+2025-12-09 17:08:31.312 [INFO]   Device 4: Stereo Mix (Realtek(R) Audio) (Channels: 2)
+2025-12-09 17:08:31.312 [INFO]   Device 5: Microphone (Camo) (Channels: 2)
+2025-12-09 17:08:31.313 [INFO] AudioCaptureService: Selected Microphone: 'Headset (realme Buds T310)' (Device 3) - Channels: 2
+2025-12-09 17:08:31.313 [INFO] AudioCaptureService: Configured WaveFormat: 16 bit PCM: 44100Hz 2 channels
+2025-12-09 17:08:31.317 [INFO] Started microphone capture
+2025-12-09 17:08:36.314 [INFO] STT chunk received:  So, talking about the packages.
+2025-12-09 17:08:36.798 [INFO] Capture stopped
+2025-12-09 17:08:36.798 [INFO] AudioCaptureService: Microphone recording stopped.
+2025-12-09 17:08:38.974 [INFO] STT chunk received:  This is in Flutter versus the plugins in Flutter.
+2025-12-09 17:08:39.017 [INFO] Flush triggered. Sending: 'So, talking about the packages.  This is in Flutter versus the plugins in Flutter.'
+2025-12-09 17:08:39.870 [INFO] BraveChatController: message sent.
+2025-12-09 17:08:39.870 [INFO] Sent to ChatGPT via Brave.
+2025-12-09 17:10:09.816 [INFO] AudioCaptureService: Found 6 recording devices.
+2025-12-09 17:10:09.817 [INFO]   Device 0: Microphone (NVIDIA Broadcast) (Channels: 2)
+2025-12-09 17:10:09.817 [INFO]   Device 1: Microphone (HD video  ) (Channels: 2)
+2025-12-09 17:10:09.817 [INFO]   Device 2: Microphone (HyperX Cloud III) (Channels: 2)
+2025-12-09 17:10:09.817 [INFO]   Device 3: Headset (realme Buds T310) (Channels: 2)
+2025-12-09 17:10:09.817 [INFO]   Device 4: Stereo Mix (Realtek(R) Audio) (Channels: 2)
+2025-12-09 17:10:09.817 [INFO]   Device 5: Microphone (Camo) (Channels: 2)
+2025-12-09 17:10:09.822 [INFO] Started system capture
+2025-12-09 17:10:20.159 [INFO] Capture stopped
+2025-12-09 17:19:28.935 [INFO] AudioCaptureService: Found 6 recording devices.
+2025-12-09 17:19:28.935 [INFO]   Device 0: Microphone (NVIDIA Broadcast) (Channels: 2)
+2025-12-09 17:19:28.935 [INFO]   Device 1: Microphone (HD video  ) (Channels: 2)
+2025-12-09 17:19:28.935 [INFO]   Device 2: Microphone (HyperX Cloud III) (Channels: 2)
+2025-12-09 17:19:28.936 [INFO]   Device 3: Headset (realme Buds T310) (Channels: 2)
+2025-12-09 17:19:28.936 [INFO]   Device 4: Stereo Mix (Realtek(R) Audio) (Channels: 2)
+2025-12-09 17:19:28.936 [INFO]   Device 5: Microphone (Camo) (Channels: 2)
+2025-12-09 17:19:28.936 [INFO] AudioCaptureService: Selected Microphone: 'Headset (realme Buds T310)' (Device 3) - Channels: 2
+2025-12-09 17:19:28.936 [INFO] AudioCaptureService: Configured WaveFormat: 16 bit PCM: 44100Hz 2 channels
+2025-12-09 17:19:28.941 [INFO] Started microphone capture
+2025-12-09 17:19:33.944 [INFO] STT chunk received:  You want me to, you know,
+2025-12-09 17:19:37.060 [INFO] STT chunk received:  Can tell how can we use get to do.
+2025-12-09 17:19:39.851 [INFO] Capture stopped
+2025-12-09 17:19:39.852 [INFO] AudioCaptureService: Microphone recording stopped.
+2025-12-09 17:19:39.948 [INFO] STT chunk received:  So, push pull and create a...
+2025-12-09 17:19:41.943 [INFO] STT chunk received:  Pull request or something, right?
+2025-12-09 17:19:41.970 [INFO] Flush triggered. Sending: 'You want me to, you know,  Can tell how can we use get to do.  So, push pull and create a...  Pull request or something, right?'
+2025-12-09 17:19:42.889 [INFO] BraveChatController: message sent.
+2025-12-09 17:19:42.890 [INFO] Sent to ChatGPT via Brave.
+2025-12-09 17:50:20.768 [INFO] Application shutting down
+2026-02-07 13:09:33.075 [INFO] Application starting
+2026-02-07 13:09:33.078 [DEBUG] TranscriptManager created
+2026-02-07 13:09:33.086 [INFO] Local STT configured: http://127.0.0.1:8080/inference
+2026-02-07 13:09:33.086 [INFO] MainWindow: BravePath=C:\Program Files\BraveSoftware\Brave-Browser\Application\brave.exe
+2026-02-07 13:09:33.086 [INFO] MainWindow: UserDataDir=C:\Users\pc\AppData\Local\BraveSoftware\Brave-Browser\User Data\LiveMeetProfile
+2026-02-07 13:09:33.086 [INFO] MainWindow: ChromeDriverDir=C:\Users\pc\.nuget\packages\selenium.webdriver.chromedriver\143.0.7499.4000\driver\win32
+2026-02-07 13:09:33.087 [INFO] Brave controller configured.
+2026-02-07 13:09:33.087 [INFO] TEST: forcing Brave startup for diagnostics...
+2026-02-07 13:09:33.091 [INFO] BraveChatController: using configured ChromeDriverDir: C:\Users\pc\.nuget\packages\selenium.webdriver.chromedriver\143.0.7499.4000\driver\win32
+2026-02-07 13:09:33.605 [INFO] BraveChatController: Launching Brave process manually: C:\Program Files\BraveSoftware\Brave-Browser\Application\brave.exe --remote-debugging-port=9222 --user-data-dir="C:\Users\pc\AppData\Local\BraveSoftware\Brave-Browser\User Data\LiveMeetProfile" --disable-blink-features=AutomationControlled --user-agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36" "https://chatgpt.com/?temporary-chat=true"
+2026-02-07 13:09:37.309 [INFO] BraveChatController: Connected to Brave via remote debugging.
+2026-02-07 13:09:38.609 [INFO] BraveChatController: Enabling Temporary Chat...
+2026-02-07 13:09:38.611 [INFO] BraveChatController: Enabling Temporary Chat via URL navigation...
+2026-02-07 13:09:40.981 [INFO] BraveChatController: Ready to chat.
+2026-02-07 13:09:40.981 [INFO] TEST: EnsureWindowStarted() returned without exception.
+2026-02-07 13:09:41.215 [INFO] Hotkeys registered
+2026-02-07 13:10:03.280 [INFO] BraveChatController: message sent.
+2026-02-07 13:10:16.412 [INFO] Application shutting down

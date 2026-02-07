@@ -5,17 +5,17 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{AB1AD233-CC0E-47CD-BF93-26B20DCF2B3E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LiveMeetAI.Core", "src\LiveMeetAI.Core\LiveMeetAI.Core.csproj", "{C7F29BF3-2865-435C-86B7-96637645B760}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LiveMeetAI.Core", "LiveMeetAI.Core\LiveMeetAI.Core.csproj", "{C7F29BF3-2865-435C-86B7-96637645B760}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LiveMeetAI.Audio", "src\LiveMeetAI.Audio\LiveMeetAI.Audio.csproj", "{4EEEF617-7EEC-4491-8E77-19FA88AACF2D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LiveMeetAI.Audio", "LiveMeetAI.Audio\LiveMeetAI.Audio.csproj", "{4EEEF617-7EEC-4491-8E77-19FA88AACF2D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LiveMeetAI.STT", "src\LiveMeetAI.STT\LiveMeetAI.STT.csproj", "{0DF1B7C9-4856-4804-AF34-D0C720E99BBC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LiveMeetAI.STT", "LiveMeetAI.STT\LiveMeetAI.STT.csproj", "{0DF1B7C9-4856-4804-AF34-D0C720E99BBC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LiveMeetAI.AI", "src\LiveMeetAI.AI\LiveMeetAI.AI.csproj", "{B93FDBB7-27B3-4229-9F87-42D5DB95B585}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LiveMeetAI.AI", "LiveMeetAI.AI\LiveMeetAI.AI.csproj", "{B93FDBB7-27B3-4229-9F87-42D5DB95B585}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LiveMeetAI.Utils", "src\LiveMeetAI.Utils\LiveMeetAI.Utils.csproj", "{8D8C4EDF-361A-4BE8-8CAD-F9AEA979D9AC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LiveMeetAI.Utils", "LiveMeetAI.Utils\LiveMeetAI.Utils.csproj", "{8D8C4EDF-361A-4BE8-8CAD-F9AEA979D9AC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LiveMeetAI.App", "src\LiveMeetAI.App\LiveMeetAI.App.csproj", "{0352948A-AE87-44F9-BD50-65CC38DED0FF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LiveMeetAI.App", "LiveMeetAI.App\LiveMeetAI.App.csproj", "{0352948A-AE87-44F9-BD50-65CC38DED0FF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
