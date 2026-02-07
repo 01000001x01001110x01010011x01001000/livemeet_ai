@@ -1,0 +1,67 @@
+<Window x:Class="LiveMeetAI.App.ScreenShareWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Screen Share - Hidden Apps Manager" 
+        Height="600" 
+        Width="1000"
+        Background="Black"
+        Topmost="False"
+        WindowStartupLocation="CenterScreen">
+    <DockPanel>
+        <!-- Top Control Panel -->
+        <DockPanel DockPanel.Dock="Top" Background="#1e1e1e" Height="80" Margin="0">
+            <StackPanel Orientation="Horizontal" Margin="10" VerticalAlignment="Center">
+                <Button Name="StartCaptureBtn" Click="StartCapture_Click" 
+                        Padding="10,5" Background="#0e7930" Foreground="White" FontWeight="Bold" Margin="0,0,10,0">
+                    Start Capture
+                </Button>
+                <Button Name="StopCaptureBtn" Click="StopCapture_Click" 
+                        Padding="10,5" Background="#d13438" Foreground="White" FontWeight="Bold" IsEnabled="False" Margin="0,0,10,0">
+                    Stop Capture
+                </Button>
+                <Separator Width="2" Background="#333" Margin="5,0"/>
+                <TextBlock Foreground="White" VerticalAlignment="Center" Margin="5,0">Hide Apps:</TextBlock>
+                <ComboBox Name="ProcessComboBox" Width="200" Height="30" Margin="5,0,10,0">
+                </ComboBox>
+                <Button Name="AddHideBtn" Click="AddHide_Click" 
+                        Padding="10,5" Background="#0078d4" Foreground="White" Margin="0,0,10,0">
+                    Hide Selected
+                </Button>
+            </StackPanel>
+        </DockPanel>
+
+        <!-- Hidden apps list -->
+        <DockPanel DockPanel.Dock="Top" Background="#252526" Height="60" Margin="0">
+            <TextBlock Foreground="White" Margin="10,5" VerticalAlignment="Top" FontWeight="Bold">
+                Hidden Apps:
+            </TextBlock>
+            <ListBox Name="HiddenAppsListBox" DockPanel.Dock="Left" 
+                    Background="#1e1e1e" Foreground="White" Height="50" 
+                    ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                    ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                    ItemsPanel="{DynamicResource WrapPanelItemsPanel}"
+                    Margin="10,5">
+            </ListBox>
+        </DockPanel>
+
+        <!-- Screen preview (center) -->
+        <Grid DockPanel.Dock="Top" Background="Black" Margin="0">
+            <Image Name="ScreenImage" Stretch="UniformToFill" />
+            <TextBlock Name="NoSignalText" Foreground="Gray" FontSize="24" 
+                      VerticalAlignment="Center" HorizontalAlignment="Center"
+                      Text="Ready to capture. Click 'Start Capture' to begin." />
+        </Grid>
+
+        <!-- Bottom info -->
+        <DockPanel DockPanel.Dock="Bottom" Background="#252526" Height="40" Margin="0">
+            <TextBlock Name="InfoText" Foreground="#cccccc" Margin="10,10" VerticalAlignment="Center"
+                      Text="Screen share window ready. Select this window in Teams/Meet to share." />
+        </DockPanel>
+    </DockPanel>
+
+    <Window.Resources>
+        <ItemsPanelTemplate x:Key="WrapPanelItemsPanel">
+            <WrapPanel Orientation="Horizontal" />
+        </ItemsPanelTemplate>
+    </Window.Resources>
+</Window>

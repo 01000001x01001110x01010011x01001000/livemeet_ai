@@ -557,5 +557,21 @@ namespace LiveMeetAI.App
                 MessageBox.Show("Error opening browser: " + ex.Message);
             }
         }
+
+        private void ScreenShare_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var screenShareWindow = new ScreenShareWindow();
+                screenShareWindow.Show();
+                FileLogger.Info("Screen Share window opened");
+                AiBox?.AppendText("Screen Share window opened. Select it in Teams/Meet to share.\n");
+            }
+            catch (Exception ex)
+            {
+                FileLogger.Error("ScreenShare_Click failed: " + ex.Message);
+                MessageBox.Show("Failed to open Screen Share: " + ex.Message);
+            }
+        }
     }
 }
