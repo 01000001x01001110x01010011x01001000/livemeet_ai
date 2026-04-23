@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET7_0;NETCOREAPP
 C:\Users\pc\Documents\GitHub\livemeet_ai\LiveMeetAI.App\App.xaml
-11407045341
+2816855225
 
-13-922391204
+16-1430096962
 216-374478733
-MainWindow.xaml;
+MainWindow.xaml;ScreenShareWindow.xaml;
 
 False
 
