@@ -128,7 +128,24 @@ namespace LiveMeetAI.AI
                 options.DebuggerAddress = debugAddress;
                 
                 // instantiate driver attached to the debug address
-                driver = new ChromeDriver(service, options, defaultTimeout);
+                try
+                {
+                    driver = new ChromeDriver(service, options, defaultTimeout);
+                }
+                catch (Exception ex) when (IsDriverVersionMismatch(ex) && !string.IsNullOrWhiteSpace(chromeDriverDir))
+                {
+                    FileLogger.Warn("BraveChatController: ChromeDriver version mismatch detected. Retrying with Selenium Manager/default driver resolution.");
+                    try
+                    {
+                        service?.Dispose();
+                    }
+                    catch { /* ignore */ }
+
+                    service = ChromeDriverService.CreateDefaultService();
+                    service.SuppressInitialDiagnosticInformation = true;
+                    service.HideCommandPromptWindow = true;
+                    driver = new ChromeDriver(service, options, defaultTimeout);
+                }
 
                 FileLogger.Info("BraveChatController: Connected to Brave via remote debugging.");
                 
@@ -200,8 +217,8 @@ namespace LiveMeetAI.AI
                 // For other errors (connectivity?), we might want to just log and keep going if possible, 
                 // but if we failed to attach, 'driver' might be bad.
                 FileLogger.Error("BraveChatController: failed to start/attach browser: " + ex);
-                // If driver is null/broken, we might need to dispose, but let's try to be lenient.
-                if (driver == null) Dispose(); 
+                // Keep controller alive; only reset browser/session state.
+                QuitBrowser();
             }
         }
 
@@ -243,7 +260,15 @@ namespace LiveMeetAI.AI
             if (string.IsNullOrWhiteSpace(message)) return false;
             
             // Acquire lock to prevent concurrent Selenium commands
-            await _driverLock.WaitAsync();
+            try
+            {
+                await _driverLock.WaitAsync();
+            }
+            catch (ObjectDisposedException)
+            {
+                FileLogger.Error("BraveChatController: send skipped because controller is disposed.");
+                return false;
+            }
             try
             {
                 EnsureWindowStarted();
@@ -364,6 +389,13 @@ namespace LiveMeetAI.AI
             {
                 return false;
             }
+        }
+
+        private static bool IsDriverVersionMismatch(Exception ex)
+        {
+            var msg = ex.ToString();
+            return msg.IndexOf("only supports Chrome version", StringComparison.OrdinalIgnoreCase) >= 0
+                   || msg.IndexOf("session not created", StringComparison.OrdinalIgnoreCase) >= 0;
         }
 
         private void ApplyAlwaysOnTopToBraveWindows(bool enabled)
