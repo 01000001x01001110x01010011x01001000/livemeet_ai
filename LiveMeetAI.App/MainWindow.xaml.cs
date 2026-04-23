@@ -376,13 +376,25 @@ namespace LiveMeetAI.App
             {
                 try
                 {
-                    braveController.SendMessageToChatGpt(message);
-                    FileLogger.Info("Sent to ChatGPT via Brave.");
-                    Dispatcher.Invoke(() =>
+                    var sent = braveController.SendMessageToChatGpt(message);
+                    if (sent)
                     {
-                        AiBox?.AppendText($"Sent to ChatGPT: {message}\n\n");
-                        AiBox?.ScrollToEnd();
-                    });
+                        FileLogger.Info("Sent to ChatGPT via Brave.");
+                        Dispatcher.Invoke(() =>
+                        {
+                            AiBox?.AppendText($"Sent to ChatGPT: {message}\n\n");
+                            AiBox?.ScrollToEnd();
+                        });
+                    }
+                    else
+                    {
+                        FileLogger.Warn("Failed to send to ChatGPT via Brave.");
+                        Dispatcher.Invoke(() =>
+                        {
+                            AiBox?.AppendText("Failed sending to ChatGPT: browser/input not ready.\n\n");
+                            AiBox?.ScrollToEnd();
+                        });
+                    }
                 }
                 catch (Exception ex)
                 {

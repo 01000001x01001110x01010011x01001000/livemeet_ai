@@ -59,17 +59,8 @@ namespace LiveMeetAI.AI
                 }
                 else
                 {
-                    // Fallback 1: Application Directory (where user puts manual chromedriver.exe)
-                    var appBin = AppDomain.CurrentDomain.BaseDirectory;
-                    if (File.Exists(Path.Combine(appBin, "chromedriver.exe")))
-                    {
-                        driverFolder = appBin;
-                        FileLogger.Info($"BraveChatController: found chromedriver.exe in app bin: {driverFolder}");
-                    }
-                    else
-                    {
-                         FileLogger.Warn("BraveChatController: chromedriver.exe not found in app bin or configured dir. Will try system PATH.");
-                    }
+                    // No pinned driver path configured: prefer Selenium Manager/default resolution.
+                    FileLogger.Info("BraveChatController: no ChromeDriverDir configured. Using Selenium Manager/default driver resolution.");
                 }
 
                 // Create ChromeDriverService
@@ -134,7 +125,7 @@ namespace LiveMeetAI.AI
                 {
                     driver = new ChromeDriver(service, options, defaultTimeout);
                 }
-                catch (Exception ex) when (IsDriverVersionMismatch(ex) && !string.IsNullOrWhiteSpace(chromeDriverDir))
+                catch (Exception ex) when (IsDriverVersionMismatch(ex))
                 {
                     FileLogger.Warn("BraveChatController: ChromeDriver version mismatch detected. Retrying with Selenium Manager/default driver resolution.");
                     try
