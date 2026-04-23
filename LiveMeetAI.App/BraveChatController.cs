@@ -3,6 +3,8 @@ using System;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Diagnostics;
+using System.Runtime.InteropServices;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
@@ -19,12 +21,21 @@ namespace LiveMeetAI.AI
         private readonly string? chromeDriverDir;
         private readonly TimeSpan defaultTimeout = TimeSpan.FromSeconds(60);
         private readonly SemaphoreSlim _driverLock = new SemaphoreSlim(1, 1);
+        private bool _alwaysOnTop = true;
 
         public BraveChatController(string bravePath, string userDataDir, string? chromeDriverDir = null)
         {
             this.bravePath = bravePath ?? throw new ArgumentNullException(nameof(bravePath));
             this.userDataDir = userDataDir ?? throw new ArgumentNullException(nameof(userDataDir));
             this.chromeDriverDir = chromeDriverDir;
+        }
+
+        public bool IsAlwaysOnTopEnabled => _alwaysOnTop;
+
+        public void SetAlwaysOnTop(bool enabled)
+        {
+            _alwaysOnTop = enabled;
+            ApplyAlwaysOnTopToBraveWindows(enabled);
         }
 
         /// <summary>
@@ -136,6 +147,8 @@ namespace LiveMeetAI.AI
                 {
                     FileLogger.Warn("BraveChatController: Could not maximize/focus window: " + wEx.Message);
                 }
+
+                ApplyAlwaysOnTopToBraveWindows(_alwaysOnTop);
 
                 // Verify we are on the right page or navigate if needed
                 try 
@@ -352,5 +365,52 @@ namespace LiveMeetAI.AI
                 return false;
             }
         }
+
+        private void ApplyAlwaysOnTopToBraveWindows(bool enabled)
+        {
+            try
+            {
+                foreach (var process in Process.GetProcessesByName("brave"))
+                {
+                    try
+                    {
+                        var hwnd = process.MainWindowHandle;
+                        if (hwnd == IntPtr.Zero) continue;
+
+                        SetWindowPos(
+                            hwnd,
+                            enabled ? HWND_TOPMOST : HWND_NOTOPMOST,
+                            0,
+                            0,
+                            0,
+                            0,
+                            SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE);
+                    }
+                    catch { /* best effort */ }
+                }
+
+                FileLogger.Info($"BraveChatController: AlwaysOnTop {(enabled ? "enabled" : "disabled")}");
+            }
+            catch (Exception ex)
+            {
+                FileLogger.Warn("BraveChatController: failed applying AlwaysOnTop: " + ex.Message);
+            }
+        }
+
+        private static readonly IntPtr HWND_TOPMOST = new IntPtr(-1);
+        private static readonly IntPtr HWND_NOTOPMOST = new IntPtr(-2);
+        private const uint SWP_NOSIZE = 0x0001;
+        private const uint SWP_NOMOVE = 0x0002;
+        private const uint SWP_NOACTIVATE = 0x0010;
+
+        [DllImport("user32.dll")]
+        private static extern bool SetWindowPos(
+            IntPtr hWnd,
+            IntPtr hWndInsertAfter,
+            int X,
+            int Y,
+            int cx,
+            int cy,
+            uint uFlags);
     }
 }

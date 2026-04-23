@@ -22,6 +22,7 @@ namespace LiveMeetAI.App
         private TranscriptManager transcriptManager;
         private BraveChatController? braveController;
         private HotkeyManager? hotkeyManager;
+        private bool braveAlwaysOnTop = true;
 
         // state
         // state
@@ -115,10 +116,12 @@ namespace LiveMeetAI.App
 
                 // optional: path to the directory that contains chromedriver.exe (exact folder)
                 var chromeDriverDir = settings.Value<string>("ChromeDriverDir");
+                braveAlwaysOnTop = settings.Value<bool?>("BraveAlwaysOnTop") ?? true;
 
                 FileLogger.Info($"MainWindow: BravePath={bravePath}");
                 FileLogger.Info($"MainWindow: UserDataDir={userDataDir}");
                 FileLogger.Info($"MainWindow: ChromeDriverDir={(chromeDriverDir ?? "<null>")}");
+                FileLogger.Info($"MainWindow: BraveAlwaysOnTop={braveAlwaysOnTop}");
 
                 // Only create Brave controller if bravePath and userDataDir look OK
                 if (!string.IsNullOrWhiteSpace(bravePath) && !string.IsNullOrWhiteSpace(userDataDir))
@@ -126,6 +129,7 @@ namespace LiveMeetAI.App
                     try
                     {
                         braveController = new BraveChatController(bravePath, userDataDir, chromeDriverDir);
+                        braveController.SetAlwaysOnTop(braveAlwaysOnTop);
                         FileLogger.Info("Brave controller configured.");
                     }
                     catch (Exception ex)
@@ -155,6 +159,14 @@ namespace LiveMeetAI.App
 
             Loaded += MainWindow_Loaded;
             Closing += MainWindow_Closing;
+        }
+
+        private void RefreshTopMostButtonLabel()
+        {
+            if (TopMostToggleButton != null)
+            {
+                TopMostToggleButton.Content = braveAlwaysOnTop ? "Brave On Top: ON" : "Brave On Top: OFF";
+            }
         }
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
@@ -210,6 +222,7 @@ namespace LiveMeetAI.App
                 };
 
                 FileLogger.Info("Hotkeys registered");
+                RefreshTopMostButtonLabel();
             }
             catch (Exception ex)
             {
@@ -556,6 +569,14 @@ namespace LiveMeetAI.App
             {
                 MessageBox.Show("Error opening browser: " + ex.Message);
             }
+        }
+
+        private void ToggleBraveTopMost_Click(object sender, RoutedEventArgs e)
+        {
+            braveAlwaysOnTop = !braveAlwaysOnTop;
+            braveController?.SetAlwaysOnTop(braveAlwaysOnTop);
+            RefreshTopMostButtonLabel();
+            AiBox?.AppendText($"Brave always-on-top {(braveAlwaysOnTop ? "enabled" : "disabled")}.\n");
         }
 
         private void ScreenShare_Click(object sender, RoutedEventArgs e)

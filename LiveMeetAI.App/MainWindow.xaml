@@ -16,6 +16,7 @@
             <TextBlock VerticalAlignment="Center" Text="Ask (manual):" Margin="0,0,6,0"/>
             <TextBox x:Name="AskBox" Width="400" />
             <Button Content="Open Browser" Click="OpenBrowser_Click" Margin="6,0,0,0"/>
+            <Button x:Name="TopMostToggleButton" Content="Brave On Top: ON" Click="ToggleBraveTopMost_Click" Margin="6,0,0,0"/>
             <Button Content="Ask" Click="Ask_Click" Margin="6,0,0,0"/>
             <Button Content="Start System" Click="StartSystem_Click" Margin="6,0,0,0"/>
             <Button Content="Start Mic" Click="StartMic_Click" Margin="6,0,0,0"/>
