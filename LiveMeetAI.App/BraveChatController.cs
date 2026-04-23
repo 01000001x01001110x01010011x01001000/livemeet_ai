@@ -22,6 +22,7 @@ namespace LiveMeetAI.AI
         private readonly TimeSpan defaultTimeout = TimeSpan.FromSeconds(60);
         private readonly SemaphoreSlim _driverLock = new SemaphoreSlim(1, 1);
         private bool _alwaysOnTop = true;
+        private bool _isAttachedToExistingBrowser = false;
 
         public BraveChatController(string bravePath, string userDataDir, string? chromeDriverDir = null)
         {
@@ -126,6 +127,7 @@ namespace LiveMeetAI.AI
                 // 2. Attach Selenium to the existing running browser
                 var options = new ChromeOptions();
                 options.DebuggerAddress = debugAddress;
+                _isAttachedToExistingBrowser = true;
                 
                 // instantiate driver attached to the debug address
                 try
@@ -359,8 +361,16 @@ namespace LiveMeetAI.AI
         {
             try
             {
-                driver?.Quit();
-                driver?.Dispose();
+                if (_isAttachedToExistingBrowser)
+                {
+                    // Attached via debugger address; don't close the external Brave process.
+                    driver?.Dispose();
+                }
+                else
+                {
+                    driver?.Quit();
+                    driver?.Dispose();
+                }
             }
             catch { /* ignore */ }
             try
@@ -370,6 +380,7 @@ namespace LiveMeetAI.AI
             catch { /* ignore */ }
             service = null;
             driver = null;
+            _isAttachedToExistingBrowser = false;
         }
 
         private bool IsPortOpen(string host, int port)
