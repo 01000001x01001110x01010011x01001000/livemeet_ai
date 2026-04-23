@@ -151,20 +151,14 @@ namespace LiveMeetAI.AI
 
                 FileLogger.Info("BraveChatController: Connected to Brave via remote debugging.");
                 
-                // Attempt to bring window to front / wake it up
+                // Attempt to bring Brave window to front (more reliable than WebDriver maximize on attached sessions).
                 try
                 {
-                    if (driver.WindowHandles.Count > 0)
-                    {
-                        driver.SwitchTo().Window(driver.WindowHandles[0]);
-                        // Simple toggle to wake up window manager
-                        // driver.Manage().Window.Minimize(); 
-                        driver.Manage().Window.Maximize();
-                    }
+                    BringBraveWindowToFront();
                 }
                 catch (Exception wEx)
                 {
-                    FileLogger.Warn("BraveChatController: Could not maximize/focus window: " + wEx.Message);
+                    FileLogger.Warn("BraveChatController: Could not focus Brave window: " + wEx.Message);
                 }
 
                 ApplyAlwaysOnTopToBraveWindows(_alwaysOnTop);
@@ -409,6 +403,23 @@ namespace LiveMeetAI.AI
                    || msg.IndexOf("session not created", StringComparison.OrdinalIgnoreCase) >= 0;
         }
 
+        private void BringBraveWindowToFront()
+        {
+            foreach (var process in Process.GetProcessesByName("brave"))
+            {
+                try
+                {
+                    var hwnd = process.MainWindowHandle;
+                    if (hwnd == IntPtr.Zero) continue;
+
+                    ShowWindow(hwnd, SW_RESTORE);
+                    SetForegroundWindow(hwnd);
+                    return;
+                }
+                catch { /* best effort */ }
+            }
+        }
+
         private void ApplyAlwaysOnTopToBraveWindows(bool enabled)
         {
             try
@@ -442,6 +453,7 @@ namespace LiveMeetAI.AI
 
         private static readonly IntPtr HWND_TOPMOST = new IntPtr(-1);
         private static readonly IntPtr HWND_NOTOPMOST = new IntPtr(-2);
+        private const int SW_RESTORE = 9;
         private const uint SWP_NOSIZE = 0x0001;
         private const uint SWP_NOMOVE = 0x0002;
         private const uint SWP_NOACTIVATE = 0x0010;
@@ -455,5 +467,11 @@ namespace LiveMeetAI.AI
             int cx,
             int cy,
             uint uFlags);
+
+        [DllImport("user32.dll")]
+        private static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
+
+        [DllImport("user32.dll")]
+        private static extern bool SetForegroundWindow(IntPtr hWnd);
     }
 }
