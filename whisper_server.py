@@ -1,12 +1,13 @@
 from flask import Flask, request, jsonify
-import whisper, tempfile, os, traceback, time, sys, threading
+import whisper, os, traceback, time, threading
 import numpy as np
 
 app = Flask(__name__)
 model_lock = threading.Lock()
 
 print("Loading Whisper model (this can take a while)...", flush=True)
-model = whisper.load_model("small")  # Upgrade from 'base' to 'small' for better accuracy
+model_name = os.environ.get("WHISPER_MODEL", "medium")
+model = whisper.load_model(model_name)
 print("Model loaded.", flush=True)
 
 @app.route("/inference", methods=["POST"])
@@ -37,28 +38,25 @@ def inference():
             rms = np.sqrt(np.mean(audio**2))
             print(f"Audio RMS: {rms:.4f}", flush=True)
             
-            # Threshold: 0.008 is a reasonable cutoff for empty background noise
-            if rms < 0.008:
+            # Keep this threshold conservative so quieter voices are not skipped.
+            if rms < 0.003:
                 print("Detected silence. Skipping.", flush=True)
                 return jsonify({'text': ''})
 
-            # bias towards English/Hindi mixed usage, prevent silence hallucinations
-            # Force English. Using a generic clear prompt often works better than forcing an accent.
-            prompt_text = "This is a clean transcript of a conversation in professional English. The topic is programming, specifically Flutter, Dart, mixins, state management, Provider, Riverpod, Bloc, widgets, stateless, stateful, code, syntax, and anagrams."
+            # Avoid a strong initial prompt because it can inject unrelated words.
             result = model.transcribe(
-                saved, 
+                audio,
                 fp16=False,
-                language="en", 
-                initial_prompt=prompt_text,
+                language="en",
+                task="transcribe",
                 condition_on_previous_text=False,
-                temperature=0.0
+                temperature=0.0,
+                beam_size=5,
+                best_of=5,
+                no_speech_threshold=0.45,
+                compression_ratio_threshold=2.4,
+                logprob_threshold=-1.0
             )
-
-            # Fix leakage: If Whisper just repeats the prompt, discard it.
-            txt = result.get('text', '').strip()
-            if prompt_text.lower() in txt.lower() or "transcript of a" in txt.lower():
-                 print(f"Ignored prompt leakage: {txt}", flush=True)
-                 result['text'] = ""
             
         print(f"Transcribed: {result.get('text','(no text)')[:120]}", flush=True)
         return {"text": result["text"]}

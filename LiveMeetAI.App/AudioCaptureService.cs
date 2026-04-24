@@ -61,20 +61,13 @@ namespace LiveMeetAI.Audio
             }
             else
             {
-                // Find best device (User prefers 'realme')
+                // Prefer the system-default recording device to avoid hardcoded vendor bias.
                 int targetDeviceIndex = 0;
                 string targetDeviceName = "Default (0)";
-
-                for (int i = 0; i < WaveIn.DeviceCount; i++)
+                if (WaveIn.DeviceCount > 0)
                 {
-                    var caps = WaveIn.GetCapabilities(i);
-                    // Match "realme" case-insensitive
-                    if (caps.ProductName.IndexOf("realme", StringComparison.OrdinalIgnoreCase) >= 0)
-                    {
-                        targetDeviceIndex = i;
-                        targetDeviceName = caps.ProductName;
-                        break;
-                    }
+                    var caps0 = WaveIn.GetCapabilities(0);
+                    targetDeviceName = caps0.ProductName;
                 }
 
                 var selectedCaps = WaveIn.GetCapabilities(targetDeviceIndex);
