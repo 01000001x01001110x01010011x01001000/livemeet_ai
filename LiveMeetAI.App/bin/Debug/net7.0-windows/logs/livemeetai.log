@@ -138,3 +138,150 @@
 2026-05-16 03:03:36.703 [INFO] WebView2: SendMessage result="sent"
 2026-05-16 03:03:36.703 [INFO] Sent to ChatGPT.
 2026-05-16 03:05:34.889 [INFO] Application shutting down
+2026-05-16 03:11:42.684 [INFO] Application starting
+2026-05-16 03:11:42.696 [INFO] Local STT configured: http://127.0.0.1:8080/inference
+2026-05-16 03:11:42.697 [INFO] MainWindow: WebView2 UserDataFolder=C:\Temp\LiveMeetAI_BraveProfile
+2026-05-16 03:11:42.842 [INFO] Hotkeys registered
+2026-05-16 03:11:43.067 [INFO] WebView2: Initialized and navigating to ChatGPT.
+2026-05-16 03:11:44.088 [INFO] WebView2: Navigation completed. Success=True
+2026-05-16 03:11:57.901 [INFO] Copy-search: 'dotnet build LiveMeetAI.App\LiveMeetAI.App.csproj...'
+2026-05-16 03:11:57.921 [INFO] WebView2: SendMessage result="sent"
+2026-05-16 03:11:57.922 [INFO] Sent to ChatGPT.
+2026-05-16 03:12:52.009 [INFO] Copy-search: 'void main() {
+  var list1 = const [1, 2];
+  var li...'
+2026-05-16 03:12:52.023 [INFO] WebView2: SendMessage result="sent"
+2026-05-16 03:12:52.024 [INFO] Sent to ChatGPT.
+2026-05-16 03:13:02.438 [INFO] Copy-search: 'void main() {
+  var list1 = const [1, 2];
+  var li...'
+2026-05-16 03:13:02.449 [INFO] WebView2: SendMessage result="sent"
+2026-05-16 03:13:02.450 [INFO] Sent to ChatGPT.
+2026-05-16 03:13:56.623 [INFO] Application shutting down
+2026-05-16 03:14:42.917 [INFO] Application starting
+2026-05-16 03:14:42.928 [INFO] Local STT configured: http://127.0.0.1:8080/inference
+2026-05-16 03:14:42.929 [INFO] MainWindow: WebView2 UserDataFolder=C:\Temp\LiveMeetAI_BraveProfile
+2026-05-16 03:14:43.063 [INFO] Hotkeys registered
+2026-05-16 03:14:43.278 [INFO] WebView2: Initialized and navigating to ChatGPT.
+2026-05-16 03:14:44.352 [INFO] WebView2: Navigation completed. Success=True
+2026-05-16 03:14:47.838 [INFO] Copy-search: 'void main() {
+  var list1 = const [1, 2];
+  var li...'
+2026-05-16 03:14:47.858 [INFO] WebView2: SendMessage result="sent"
+2026-05-16 03:14:47.859 [INFO] Sent to ChatGPT.
+2026-05-16 03:15:09.439 [INFO] Copy-search: 'If nothing is selected (empty clipboard), the stat...'
+2026-05-16 03:15:09.450 [INFO] WebView2: SendMessage result="sent"
+2026-05-16 03:15:09.451 [INFO] Sent to ChatGPT.
+2026-05-16 03:17:31.860 [INFO] Copy-search: '// 0,0,0,1,1,1 output'
+2026-05-16 03:17:31.876 [INFO] WebView2: SendMessage result="sent"
+2026-05-16 03:17:31.876 [INFO] Sent to ChatGPT.
+2026-05-16 03:17:40.968 [INFO] Copy-search: '// 1,0,1,0,0,1 input
+// 0,0,0,1,1,1 output'
+2026-05-16 03:17:40.979 [INFO] WebView2: SendMessage result="sent"
+2026-05-16 03:17:40.980 [INFO] Sent to ChatGPT.
+2026-05-16 03:18:34.378 [INFO] Copy-search: '// 1,0,1,0,0,1 input
+// 0,0,0,1,1,1 output'
+2026-05-16 03:18:34.388 [INFO] WebView2: SendMessage result="sent"
+2026-05-16 03:18:34.388 [INFO] Sent to ChatGPT.
+2026-05-16 03:19:32.611 [INFO] Copy-search: '// 1,0,1,0,0,1 user input
+// 0,0,0,1,1,1 function...'
+2026-05-16 03:19:32.623 [INFO] WebView2: SendMessage result="sent"
+2026-05-16 03:19:32.624 [INFO] Sent to ChatGPT.
+2026-05-16 03:20:18.625 [INFO] Copy-search: '// List = [1,0,1,0,0,1] user input
+// List = [0,0...'
+2026-05-16 03:20:18.638 [INFO] WebView2: SendMessage result="sent"
+2026-05-16 03:20:18.638 [INFO] Sent to ChatGPT.
+2026-05-16 03:23:57.423 [INFO] AudioCaptureService: Found 6 recording devices.
+2026-05-16 03:23:57.425 [INFO]   Device 0: Microphone (2- HD video  ) (Channels: 2)
+2026-05-16 03:23:57.425 [INFO]   Device 1: Stereo Mix (Realtek(R) Audio) (Channels: 2)
+2026-05-16 03:23:57.425 [INFO]   Device 2: Microphone (Camo) (Channels: 2)
+2026-05-16 03:23:57.425 [INFO]   Device 3: Microphone (HyperX Cloud III) (Channels: 2)
+2026-05-16 03:23:57.425 [INFO]   Device 4: Headset (realme Buds T310) (Channels: 2)
+2026-05-16 03:23:57.426 [INFO]   Device 5: Microphone (NVIDIA Broadcast) (Channels: 2)
+2026-05-16 03:23:57.426 [INFO] AudioCaptureService: Selected Microphone: 'Microphone (2- HD video  )' (Device 0) - Channels: 2
+2026-05-16 03:23:57.427 [INFO] AudioCaptureService: Configured WaveFormat: 16 bit PCM: 44100Hz 2 channels
+2026-05-16 03:23:57.445 [INFO] Started microphone capture
+2026-05-16 03:24:00.861 [INFO] STT chunk received:  Thank you for watching!
+2026-05-16 03:24:04.107 [INFO] STT chunk received:  Thanks for watching, and have a great day!
+2026-05-16 03:24:06.956 [INFO] STT chunk received:  Thanks for watching!
+2026-05-16 03:24:09.913 [INFO] STT chunk received:  Thanks for watching!
+2026-05-16 03:24:12.958 [INFO] STT chunk received:  Thanks for watching!
+2026-05-16 03:24:15.945 [INFO] STT chunk received:  Thanks for watching!
+2026-05-16 03:24:18.956 [INFO] STT chunk received:  Thanks for watching!
+2026-05-16 03:24:21.936 [INFO] STT chunk received:  Thanks for watching!
+2026-05-16 03:24:23.906 [INFO] Capture stopped
+2026-05-16 03:24:23.906 [INFO] AudioCaptureService: Microphone recording stopped.
+2026-05-16 03:24:24.292 [INFO] STT chunk received:  Thanks for watching!
+2026-05-16 03:24:24.308 [INFO] Flush triggered. Sending: 'Thank you for watching!  Thanks for watching, and have a great day!  Thanks for watching!  Thanks for watching!  Thanks for watching!  Thanks for watching!  Thanks for watching!  Thanks for watching!  Thanks for watching!'
+2026-05-16 03:24:24.325 [INFO] WebView2: SendMessage result="sent"
+2026-05-16 03:24:24.325 [INFO] Sent to ChatGPT.
+2026-05-16 03:24:32.443 [INFO] AudioCaptureService: Found 6 recording devices.
+2026-05-16 03:24:32.444 [INFO]   Device 0: Microphone (2- HD video  ) (Channels: 2)
+2026-05-16 03:24:32.444 [INFO]   Device 1: Stereo Mix (Realtek(R) Audio) (Channels: 2)
+2026-05-16 03:24:32.444 [INFO]   Device 2: Microphone (Camo) (Channels: 2)
+2026-05-16 03:24:32.444 [INFO]   Device 3: Microphone (HyperX Cloud III) (Channels: 2)
+2026-05-16 03:24:32.444 [INFO]   Device 4: Headset (realme Buds T310) (Channels: 2)
+2026-05-16 03:24:32.445 [INFO]   Device 5: Microphone (NVIDIA Broadcast) (Channels: 2)
+2026-05-16 03:24:32.445 [INFO] AudioCaptureService: Selected Microphone: 'Microphone (2- HD video  )' (Device 0) - Channels: 2
+2026-05-16 03:24:32.445 [INFO] AudioCaptureService: Configured WaveFormat: 16 bit PCM: 44100Hz 2 channels
+2026-05-16 03:24:32.454 [INFO] Started microphone capture
+2026-05-16 03:24:37.917 [INFO] Capture stopped
+2026-05-16 03:24:37.917 [INFO] AudioCaptureService: Microphone recording stopped.
+2026-05-16 03:24:42.831 [INFO] STT chunk received:  1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15...
+2026-05-16 03:24:42.957 [WARN] StopAll: Timeout waiting for pending STT.
+2026-05-16 03:24:42.957 [INFO] Flush triggered. Sending: '1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44'
+2026-05-16 03:24:42.968 [INFO] WebView2: SendMessage result="sent"
+2026-05-16 03:24:42.968 [INFO] Sent to ChatGPT.
+2026-05-16 03:24:43.317 [INFO] STT chunk received:  . . .
+2026-05-16 03:24:47.318 [INFO] Debounce triggered. Sending: '. . .'
+2026-05-16 03:24:47.325 [INFO] WebView2: SendMessage result="sent"
+2026-05-16 03:24:47.325 [INFO] Sent to ChatGPT.
+2026-05-16 03:24:59.390 [INFO] AudioCaptureService: Found 6 recording devices.
+2026-05-16 03:24:59.391 [INFO]   Device 0: Microphone (2- HD video  ) (Channels: 2)
+2026-05-16 03:24:59.391 [INFO]   Device 1: Stereo Mix (Realtek(R) Audio) (Channels: 2)
+2026-05-16 03:24:59.391 [INFO]   Device 2: Microphone (Camo) (Channels: 2)
+2026-05-16 03:24:59.391 [INFO]   Device 3: Microphone (HyperX Cloud III) (Channels: 2)
+2026-05-16 03:24:59.392 [INFO]   Device 4: Headset (realme Buds T310) (Channels: 2)
+2026-05-16 03:24:59.392 [INFO]   Device 5: Microphone (NVIDIA Broadcast) (Channels: 2)
+2026-05-16 03:24:59.392 [INFO] AudioCaptureService: Selected Microphone: 'Microphone (2- HD video  )' (Device 0) - Channels: 2
+2026-05-16 03:24:59.392 [INFO] AudioCaptureService: Configured WaveFormat: 16 bit PCM: 44100Hz 2 channels
+2026-05-16 03:24:59.401 [INFO] Started microphone capture
+2026-05-16 03:25:01.785 [INFO] Capture stopped
+2026-05-16 03:25:01.785 [INFO] AudioCaptureService: Microphone recording stopped.
+2026-05-16 03:25:02.586 [INFO] STT chunk received:  Do you know what is mixing it with?
+2026-05-16 03:25:02.593 [INFO] Flush triggered. Sending: 'Do you know what is mixing it with?'
+2026-05-16 03:25:02.604 [INFO] WebView2: SendMessage result="sent"
+2026-05-16 03:25:02.605 [INFO] Sent to ChatGPT.
+2026-05-16 03:25:08.517 [INFO] AudioCaptureService: Found 6 recording devices.
+2026-05-16 03:25:08.518 [INFO]   Device 0: Microphone (2- HD video  ) (Channels: 2)
+2026-05-16 03:25:08.518 [INFO]   Device 1: Stereo Mix (Realtek(R) Audio) (Channels: 2)
+2026-05-16 03:25:08.518 [INFO]   Device 2: Microphone (Camo) (Channels: 2)
+2026-05-16 03:25:08.519 [INFO]   Device 3: Microphone (HyperX Cloud III) (Channels: 2)
+2026-05-16 03:25:08.519 [INFO]   Device 4: Headset (realme Buds T310) (Channels: 2)
+2026-05-16 03:25:08.519 [INFO]   Device 5: Microphone (NVIDIA Broadcast) (Channels: 2)
+2026-05-16 03:25:08.520 [INFO] AudioCaptureService: Selected Microphone: 'Microphone (2- HD video  )' (Device 0) - Channels: 2
+2026-05-16 03:25:08.520 [INFO] AudioCaptureService: Configured WaveFormat: 16 bit PCM: 44100Hz 2 channels
+2026-05-16 03:25:08.529 [INFO] Started microphone capture
+2026-05-16 03:25:09.526 [INFO] Capture stopped
+2026-05-16 03:25:09.526 [INFO] AudioCaptureService: Microphone recording stopped.
+2026-05-16 03:25:09.987 [INFO] STT chunk received:  Yeah, yeah.
+2026-05-16 03:25:10.028 [INFO] Flush triggered. Sending: 'Yeah, yeah.'
+2026-05-16 03:25:10.039 [INFO] WebView2: SendMessage result="sent"
+2026-05-16 03:25:10.039 [INFO] Sent to ChatGPT.
+2026-05-16 03:25:12.214 [INFO] AudioCaptureService: Found 6 recording devices.
+2026-05-16 03:25:12.215 [INFO]   Device 0: Microphone (2- HD video  ) (Channels: 2)
+2026-05-16 03:25:12.215 [INFO]   Device 1: Stereo Mix (Realtek(R) Audio) (Channels: 2)
+2026-05-16 03:25:12.215 [INFO]   Device 2: Microphone (Camo) (Channels: 2)
+2026-05-16 03:25:12.216 [INFO]   Device 3: Microphone (HyperX Cloud III) (Channels: 2)
+2026-05-16 03:25:12.216 [INFO]   Device 4: Headset (realme Buds T310) (Channels: 2)
+2026-05-16 03:25:12.216 [INFO]   Device 5: Microphone (NVIDIA Broadcast) (Channels: 2)
+2026-05-16 03:25:12.217 [INFO] AudioCaptureService: Selected Microphone: 'Microphone (2- HD video  )' (Device 0) - Channels: 2
+2026-05-16 03:25:12.217 [INFO] AudioCaptureService: Configured WaveFormat: 16 bit PCM: 44100Hz 2 channels
+2026-05-16 03:25:12.226 [INFO] Started microphone capture
+2026-05-16 03:25:13.792 [INFO] Capture stopped
+2026-05-16 03:25:13.792 [INFO] AudioCaptureService: Microphone recording stopped.
+2026-05-16 03:25:14.267 [INFO] STT chunk received:  We are dead.
+2026-05-16 03:25:14.296 [INFO] Flush triggered. Sending: 'We are dead.'
+2026-05-16 03:25:14.307 [INFO] WebView2: SendMessage result="sent"
+2026-05-16 03:25:14.307 [INFO] Sent to ChatGPT.
+2026-05-16 03:25:17.678 [INFO] Application shutting down

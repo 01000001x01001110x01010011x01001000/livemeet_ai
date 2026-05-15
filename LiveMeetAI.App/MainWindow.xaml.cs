@@ -36,6 +36,8 @@ namespace LiveMeetAI.App
         private static extern uint SetWindowDisplayAffinity(IntPtr hwnd, uint dwAffinity);
         [DllImport("user32.dll")]
         private static extern short GetAsyncKeyState(int vKey);
+        [DllImport("user32.dll")]
+        private static extern void keybd_event(byte bVk, byte bScan, int dwFlags, int dwExtraInfo);
 
         private const uint WDA_EXCLUDEFROMCAPTURE = 0x00000011;
         private const int VK_SHIFT = 0x10;
@@ -94,10 +96,12 @@ namespace LiveMeetAI.App
                 const uint VK_S_KEY = 0x53;
                 const uint VK_M_KEY = 0x4D;
                 const uint VK_P_KEY = 0x50;
+                const uint VK_Q_KEY = 0x51;
 
                 hotkeyManager.RegisterHotKey(MOD_CTRL | MOD_SHIFT, VK_S_KEY);
                 hotkeyManager.RegisterHotKey(MOD_CTRL | MOD_SHIFT, VK_M_KEY);
                 hotkeyManager.RegisterHotKey(MOD_CTRL | MOD_SHIFT, VK_P_KEY);
+                hotkeyManager.RegisterHotKey(MOD_CTRL | MOD_SHIFT, VK_Q_KEY);
 
                 SetWindowDisplayAffinity(helper.Handle, WDA_EXCLUDEFROMCAPTURE);
 
@@ -111,6 +115,7 @@ namespace LiveMeetAI.App
                         if (id == 1) { if (!isSystemRunning) StartSystem(); currentHotkeyId = 1; keyPollingTimer?.Start(); }
                         else if (id == 2) { if (!isMicRunning) StartMic(); currentHotkeyId = 2; keyPollingTimer?.Start(); }
                         else if (id == 3) { StopAll(); }
+                        else if (id == 4) { Task.Run(SimulateCopyAndSearch); }
                     });
                 };
 
@@ -359,6 +364,44 @@ namespace LiveMeetAI.App
                 FileLogger.Error("ScreenShare_Click failed: " + ex.Message);
                 MessageBox.Show("Failed to open Screen Share: " + ex.Message);
             }
+        }
+
+        private async Task SimulateCopyAndSearch()
+        {
+            try
+            {
+                const byte VK_SHIFT_B = 0x10;
+                const byte VK_C_B = 0x43;
+                const byte VK_CTRL_B = 0x11;
+                const int KEYEVENTF_KEYUP = 0x0002;
+
+                // The user held Ctrl+Shift+C to trigger the hotkey.
+                // Release Shift so the resulting keystroke is Ctrl+C (copy), not Ctrl+Shift+C.
+                keybd_event(VK_SHIFT_B, 0, KEYEVENTF_KEYUP, 0);
+                keybd_event(VK_C_B, 0, 0, 0);
+                keybd_event(VK_C_B, 0, KEYEVENTF_KEYUP, 0);
+                keybd_event(VK_CTRL_B, 0, KEYEVENTF_KEYUP, 0);
+
+                await Task.Delay(150);
+
+                string? text = null;
+                Dispatcher.Invoke(() =>
+                {
+                    try { text = Clipboard.GetText(); }
+                    catch (Exception ex) { FileLogger.Warn("Clipboard read failed: " + ex.Message); }
+                });
+
+                if (!string.IsNullOrWhiteSpace(text))
+                {
+                    FileLogger.Info($"Copy-search: '{(text.Length > 50 ? text[..50] + "..." : text)}'");
+                    await TrySendToChat(text);
+                }
+                else
+                {
+                    AppendStatus("Copy-search: nothing selected.");
+                }
+            }
+            catch (Exception ex) { FileLogger.Error("SimulateCopyAndSearch failed: " + ex.Message); }
         }
     }
 }

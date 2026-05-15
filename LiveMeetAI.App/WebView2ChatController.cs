@@ -37,6 +37,9 @@ namespace LiveMeetAI.AI
                     FileLogger.Info($"WebView2: Navigation completed. Success={e.IsSuccess}");
                 };
 
+                // Disable DevTools so Ctrl+Shift+C (and other browser debug shortcuts) don't fire.
+                _webView.CoreWebView2.Settings.AreDevToolsEnabled = false;
+
                 // Force dark mode so ChatGPT loads in dark theme
                 _webView.CoreWebView2.Profile.PreferredColorScheme = CoreWebView2PreferredColorScheme.Dark;
 
