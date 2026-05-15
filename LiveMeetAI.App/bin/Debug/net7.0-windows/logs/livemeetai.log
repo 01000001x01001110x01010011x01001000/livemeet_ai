@@ -88,3 +88,53 @@
 2026-05-16 02:34:46.681 [INFO] WebView2: SendMessage result="sent"
 2026-05-16 02:34:46.682 [INFO] Sent to ChatGPT.
 2026-05-16 02:36:03.309 [INFO] Application shutting down
+2026-05-16 02:37:23.823 [INFO] Application starting
+2026-05-16 02:37:23.836 [INFO] Local STT configured: http://127.0.0.1:8080/inference
+2026-05-16 02:37:23.836 [INFO] MainWindow: WebView2 UserDataFolder=C:\Temp\LiveMeetAI_BraveProfile
+2026-05-16 02:37:23.969 [INFO] Hotkeys registered
+2026-05-16 02:37:24.176 [INFO] WebView2: Initialized and navigating to ChatGPT.
+2026-05-16 02:37:25.220 [INFO] WebView2: Navigation completed. Success=True
+2026-05-16 02:37:37.527 [INFO] WebView2: Navigation completed. Success=True
+2026-05-16 02:38:07.557 [INFO] WebView2: Navigation completed. Success=True
+2026-05-16 02:38:46.909 [INFO] WebView2: Navigation completed. Success=True
+2026-05-16 02:38:53.840 [INFO] WebView2: Navigation completed. Success=True
+2026-05-16 03:00:21.115 [INFO] Application starting
+2026-05-16 03:00:21.127 [INFO] Local STT configured: http://127.0.0.1:8080/inference
+2026-05-16 03:00:21.128 [INFO] MainWindow: WebView2 UserDataFolder=C:\Temp\LiveMeetAI_BraveProfile
+2026-05-16 03:00:21.248 [INFO] Hotkeys registered
+2026-05-16 03:00:21.440 [INFO] WebView2: Initialized and navigating to ChatGPT.
+2026-05-16 03:00:22.536 [INFO] WebView2: Navigation completed. Success=True
+2026-05-16 03:01:37.245 [INFO] Application shutting down
+2026-05-16 03:02:54.917 [INFO] Application starting
+2026-05-16 03:02:54.929 [INFO] Local STT configured: http://127.0.0.1:8080/inference
+2026-05-16 03:02:54.929 [INFO] MainWindow: WebView2 UserDataFolder=C:\Temp\LiveMeetAI_BraveProfile
+2026-05-16 03:02:55.051 [INFO] Hotkeys registered
+2026-05-16 03:02:55.234 [INFO] WebView2: Initialized and navigating to ChatGPT.
+2026-05-16 03:02:56.191 [INFO] WebView2: Navigation completed. Success=True
+2026-05-16 03:03:09.131 [INFO] AudioCaptureService: Found 5 recording devices.
+2026-05-16 03:03:09.133 [INFO]   Device 0: Microphone (2- HD video  ) (Channels: 2)
+2026-05-16 03:03:09.133 [INFO]   Device 1: Stereo Mix (Realtek(R) Audio) (Channels: 2)
+2026-05-16 03:03:09.133 [INFO]   Device 2: Microphone (Camo) (Channels: 2)
+2026-05-16 03:03:09.133 [INFO]   Device 3: Microphone (HyperX Cloud III) (Channels: 2)
+2026-05-16 03:03:09.134 [INFO]   Device 4: Microphone (NVIDIA Broadcast) (Channels: 2)
+2026-05-16 03:03:09.143 [INFO] Started system capture
+2026-05-16 03:03:12.683 [INFO] Capture stopped
+2026-05-16 03:03:12.898 [INFO] STT chunk received:  how to describe different ways to handle user ges...
+2026-05-16 03:03:13.170 [INFO] STT chunk received:  See you later.
+2026-05-16 03:03:13.225 [INFO] Flush triggered. Sending: 'how to describe different ways to handle user gestures in  See you later.'
+2026-05-16 03:03:13.242 [INFO] WebView2: SendMessage result="sent"
+2026-05-16 03:03:13.243 [INFO] Sent to ChatGPT.
+2026-05-16 03:03:32.045 [INFO] AudioCaptureService: Found 5 recording devices.
+2026-05-16 03:03:32.045 [INFO]   Device 0: Microphone (2- HD video  ) (Channels: 2)
+2026-05-16 03:03:32.046 [INFO]   Device 1: Stereo Mix (Realtek(R) Audio) (Channels: 2)
+2026-05-16 03:03:32.046 [INFO]   Device 2: Microphone (Camo) (Channels: 2)
+2026-05-16 03:03:32.046 [INFO]   Device 3: Microphone (HyperX Cloud III) (Channels: 2)
+2026-05-16 03:03:32.046 [INFO]   Device 4: Microphone (NVIDIA Broadcast) (Channels: 2)
+2026-05-16 03:03:32.051 [INFO] Started system capture
+2026-05-16 03:03:35.563 [INFO] Capture stopped
+2026-05-16 03:03:35.935 [INFO] STT chunk received:  How to describe different ways to handle user ges...
+2026-05-16 03:03:36.667 [INFO] STT chunk received:  Don't forget to subscribe to our YouTube channel ...
+2026-05-16 03:03:36.689 [INFO] Flush triggered. Sending: 'How to describe different ways to handle user gestures in Flutter  Don't forget to subscribe to our YouTube channel for more videos like this.'
+2026-05-16 03:03:36.703 [INFO] WebView2: SendMessage result="sent"
+2026-05-16 03:03:36.703 [INFO] Sent to ChatGPT.
+2026-05-16 03:05:34.889 [INFO] Application shutting down

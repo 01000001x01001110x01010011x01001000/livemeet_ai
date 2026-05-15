@@ -18,7 +18,6 @@ namespace LiveMeetAI.App
     {
         private AudioCaptureService? audioService;
         private ITranscriptionService? stt;
-        private TranscriptManager transcriptManager;
         private WebView2ChatController? chatController;
         private HotkeyManager? hotkeyManager;
 
@@ -51,8 +50,6 @@ namespace LiveMeetAI.App
         {
             InitializeComponent();
             FileLogger.Info("Application starting");
-
-            transcriptManager = new TranscriptManager();
 
             var settingsPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "settings.json");
             JObject? settings = null;
@@ -175,14 +172,7 @@ namespace LiveMeetAI.App
             {
                 if (string.IsNullOrWhiteSpace(text)) return;
 
-                transcriptManager.Add(text);
                 FileLogger.Info("STT chunk received: " + (text.Length > 50 ? text[..50] + "..." : text));
-
-                Dispatcher.Invoke(() =>
-                {
-                    TranscriptBox?.AppendText($"{DateTime.Now:HH:mm:ss}  {text}\n");
-                    TranscriptBox?.ScrollToEnd();
-                });
 
                 lock (transcriptBuffer)
                 {
@@ -347,22 +337,6 @@ namespace LiveMeetAI.App
                 }
             }
             catch (Exception ex) { FileLogger.Error("StopAll failed: " + ex.Message); }
-        }
-
-        private async void Ask_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                var q = AskBox.Text?.Trim();
-                if (string.IsNullOrEmpty(q)) return;
-                AskBox.Clear();
-                await TrySendToChat(q);
-            }
-            catch (Exception ex)
-            {
-                FileLogger.Error("Ask_Click failed: " + ex.Message);
-                MessageBox.Show("Ask failed: " + ex.Message);
-            }
         }
 
         private void OpenBrowser_Click(object sender, RoutedEventArgs e)
