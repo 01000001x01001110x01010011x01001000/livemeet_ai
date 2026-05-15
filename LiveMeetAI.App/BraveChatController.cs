@@ -22,7 +22,7 @@ namespace LiveMeetAI.AI
         private readonly TimeSpan defaultTimeout = TimeSpan.FromSeconds(60);
         private readonly SemaphoreSlim _driverLock = new SemaphoreSlim(1, 1);
         private bool _alwaysOnTop = true;
-        private bool _excludeFromCapture = false;
+        private bool _excludeFromCapture = true;
         private bool _isAttachedToExistingBrowser = false;
 
         public BraveChatController(string bravePath, string userDataDir, string? chromeDriverDir = null)

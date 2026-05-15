@@ -1,77 +1,90 @@
-2026-05-16 01:58:23.990 [INFO] Application starting
-2026-05-16 01:58:23.993 [DEBUG] TranscriptManager created
-2026-05-16 01:58:24.002 [INFO] Local STT configured: http://127.0.0.1:8080/inference
-2026-05-16 01:58:24.002 [INFO] MainWindow: BravePath=C:\Program Files\BraveSoftware\Brave-Browser\Application\brave.exe
-2026-05-16 01:58:24.002 [INFO] MainWindow: UserDataDir=C:\Temp\LiveMeetAI_BraveProfile
-2026-05-16 01:58:24.003 [INFO] MainWindow: ChromeDriverDir=C:\Tools\chromedriver147\chromedriver-win64
-2026-05-16 01:58:24.003 [INFO] MainWindow: BraveAlwaysOnTop=True
-2026-05-16 01:58:24.008 [INFO] BraveChatController: AlwaysOnTop enabled
-2026-05-16 01:58:24.008 [INFO] Brave controller configured.
-2026-05-16 01:58:24.008 [INFO] TEST: forcing Brave startup for diagnostics...
-2026-05-16 01:58:24.012 [INFO] BraveChatController: using configured ChromeDriverDir: C:\Tools\chromedriver147\chromedriver-win64
-2026-05-16 01:58:24.528 [INFO] BraveChatController: Launching Brave process manually: C:\Program Files\BraveSoftware\Brave-Browser\Application\brave.exe --remote-debugging-port=9222 --user-data-dir="C:\Temp\LiveMeetAI_BraveProfile" --disable-blink-features=AutomationControlled --user-agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36" "https://chatgpt.com/?temporary-chat=true"
-2026-05-16 01:58:27.699 [INFO] BraveChatController: Connected to Brave via remote debugging.
-2026-05-16 01:58:27.723 [INFO] BraveChatController: AlwaysOnTop enabled
-2026-05-16 01:58:27.732 [INFO] BraveChatController: ExcludeFromCapture disabled
-2026-05-16 01:58:29.320 [INFO] BraveChatController: Enabling Temporary Chat...
-2026-05-16 01:58:29.324 [INFO] BraveChatController: Enabling Temporary Chat via URL navigation...
-2026-05-16 01:58:32.170 [INFO] BraveChatController: Ready to chat.
-2026-05-16 01:58:32.170 [INFO] TEST: EnsureWindowStarted() returned without exception.
-2026-05-16 01:58:32.308 [INFO] Hotkeys registered
-2026-05-16 01:58:46.298 [INFO] AudioCaptureService: Found 5 recording devices.
-2026-05-16 01:58:46.299 [INFO]   Device 0: Microphone (2- HD video  ) (Channels: 2)
-2026-05-16 01:58:46.300 [INFO]   Device 1: Stereo Mix (Realtek(R) Audio) (Channels: 2)
-2026-05-16 01:58:46.300 [INFO]   Device 2: Microphone (Camo) (Channels: 2)
-2026-05-16 01:58:46.300 [INFO]   Device 3: Microphone (HyperX Cloud III) (Channels: 2)
-2026-05-16 01:58:46.300 [INFO]   Device 4: Microphone (NVIDIA Broadcast) (Channels: 2)
-2026-05-16 01:58:46.313 [INFO] Started system capture
-2026-05-16 01:58:51.431 [INFO] STT chunk received:  picked up, plopped into a glass coffee, and
-2026-05-16 01:58:52.927 [INFO] STT chunk received:  forced to the bottom of the ocean. You start.
-2026-05-16 01:58:55.976 [INFO] STT chunk received:  freaking out because you have no idea why you
-2026-05-16 01:58:59.232 [INFO] STT chunk received:  You're here. And everything happens so fast that ...
-2026-05-16 01:59:00.683 [INFO] Capture stopped
-2026-05-16 01:59:01.091 [INFO] STT chunk received:  I don't know how deep you are.
-2026-05-16 01:59:01.116 [INFO] Flush triggered. Sending: 'picked up, plopped into a glass coffee, and  forced to the bottom of the ocean. You start.  freaking out because you have no idea why you  You're here. And everything happens so fast that you don't...  I don't know how deep you are.'
-2026-05-16 01:59:02.584 [INFO] BraveChatController: message sent.
-2026-05-16 01:59:02.584 [INFO] Sent to ChatGPT via Brave.
-2026-05-16 01:59:36.318 [INFO] AudioCaptureService: Found 5 recording devices.
-2026-05-16 01:59:36.319 [INFO]   Device 0: Microphone (2- HD video  ) (Channels: 2)
-2026-05-16 01:59:36.319 [INFO]   Device 1: Stereo Mix (Realtek(R) Audio) (Channels: 2)
-2026-05-16 01:59:36.319 [INFO]   Device 2: Microphone (Camo) (Channels: 2)
-2026-05-16 01:59:36.319 [INFO]   Device 3: Microphone (HyperX Cloud III) (Channels: 2)
-2026-05-16 01:59:36.319 [INFO]   Device 4: Microphone (NVIDIA Broadcast) (Channels: 2)
-2026-05-16 01:59:36.324 [INFO] Started system capture
-2026-05-16 01:59:40.027 [INFO] STT chunk received:  That's why Flutter stands a chance in the other f...
-2026-05-16 01:59:42.936 [INFO] STT chunk received:  also moving on to our next question which is
-2026-05-16 01:59:45.373 [INFO] Capture stopped
-2026-05-16 01:59:45.929 [INFO] STT chunk received:  explain flutter architecture. So there are
-2026-05-16 01:59:45.984 [INFO] Flush triggered. Sending: 'That's why Flutter stands a chance in the other frameworks.  also moving on to our next question which is  explain flutter architecture. So there are'
-2026-05-16 01:59:47.106 [INFO] BraveChatController: message sent.
-2026-05-16 01:59:47.107 [INFO] Sent to ChatGPT via Brave.
-2026-05-16 02:00:14.039 [INFO] AudioCaptureService: Found 5 recording devices.
-2026-05-16 02:00:14.040 [INFO]   Device 0: Microphone (2- HD video  ) (Channels: 2)
-2026-05-16 02:00:14.040 [INFO]   Device 1: Stereo Mix (Realtek(R) Audio) (Channels: 2)
-2026-05-16 02:00:14.040 [INFO]   Device 2: Microphone (Camo) (Channels: 2)
-2026-05-16 02:00:14.040 [INFO]   Device 3: Microphone (HyperX Cloud III) (Channels: 2)
-2026-05-16 02:00:14.041 [INFO]   Device 4: Microphone (NVIDIA Broadcast) (Channels: 2)
-2026-05-16 02:00:14.045 [INFO] Started system capture
-2026-05-16 02:00:17.428 [INFO] Capture stopped
-2026-05-16 02:00:17.763 [INFO] STT chunk received:  What build modes are available in Flutter?
-2026-05-16 02:00:17.998 [INFO] STT chunk received:  letter.
-2026-05-16 02:00:18.049 [INFO] Flush triggered. Sending: 'What build modes are available in Flutter?  letter.'
-2026-05-16 02:00:18.866 [INFO] BraveChatController: message sent.
-2026-05-16 02:00:18.866 [INFO] Sent to ChatGPT via Brave.
-2026-05-16 02:00:39.674 [INFO] AudioCaptureService: Found 5 recording devices.
-2026-05-16 02:00:39.675 [INFO]   Device 0: Microphone (2- HD video  ) (Channels: 2)
-2026-05-16 02:00:39.675 [INFO]   Device 1: Stereo Mix (Realtek(R) Audio) (Channels: 2)
-2026-05-16 02:00:39.675 [INFO]   Device 2: Microphone (Camo) (Channels: 2)
-2026-05-16 02:00:39.675 [INFO]   Device 3: Microphone (HyperX Cloud III) (Channels: 2)
-2026-05-16 02:00:39.675 [INFO]   Device 4: Microphone (NVIDIA Broadcast) (Channels: 2)
-2026-05-16 02:00:39.680 [INFO] Started system capture
-2026-05-16 02:00:43.468 [INFO] STT chunk received:  we will see how to explain the difference between
-2026-05-16 02:00:44.392 [INFO] Capture stopped
-2026-05-16 02:00:44.755 [INFO] STT chunk received:  and stateless widgets.
-2026-05-16 02:00:44.764 [INFO] Flush triggered. Sending: 'we will see how to explain the difference between  and stateless widgets.'
-2026-05-16 02:00:45.721 [INFO] BraveChatController: message sent.
-2026-05-16 02:00:45.721 [INFO] Sent to ChatGPT via Brave.
-2026-05-16 02:04:37.883 [INFO] Application shutting down
+2026-05-16 02:07:40.121 [INFO] Application starting
+2026-05-16 02:07:40.125 [DEBUG] TranscriptManager created
+2026-05-16 02:07:40.134 [INFO] Local STT configured: http://127.0.0.1:8080/inference
+2026-05-16 02:07:40.135 [INFO] MainWindow: BravePath=C:\Program Files\BraveSoftware\Brave-Browser\Application\brave.exe
+2026-05-16 02:07:40.135 [INFO] MainWindow: UserDataDir=C:\Temp\LiveMeetAI_BraveProfile
+2026-05-16 02:07:40.135 [INFO] MainWindow: ChromeDriverDir=C:\Tools\chromedriver147\chromedriver-win64
+2026-05-16 02:07:40.136 [INFO] MainWindow: BraveAlwaysOnTop=True
+2026-05-16 02:07:40.142 [INFO] BraveChatController: AlwaysOnTop enabled
+2026-05-16 02:07:40.142 [INFO] Brave controller configured.
+2026-05-16 02:07:40.142 [INFO] TEST: forcing Brave startup for diagnostics...
+2026-05-16 02:07:40.146 [INFO] BraveChatController: using configured ChromeDriverDir: C:\Tools\chromedriver147\chromedriver-win64
+2026-05-16 02:07:40.666 [INFO] BraveChatController: Launching Brave process manually: C:\Program Files\BraveSoftware\Brave-Browser\Application\brave.exe --remote-debugging-port=9222 --user-data-dir="C:\Temp\LiveMeetAI_BraveProfile" --disable-blink-features=AutomationControlled --user-agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36" "https://chatgpt.com/?temporary-chat=true"
+2026-05-16 02:07:43.767 [INFO] BraveChatController: Connected to Brave via remote debugging.
+2026-05-16 02:07:43.777 [INFO] BraveChatController: AlwaysOnTop enabled
+2026-05-16 02:07:43.781 [INFO] BraveChatController: ExcludeFromCapture enabled
+2026-05-16 02:07:45.374 [INFO] BraveChatController: Enabling Temporary Chat...
+2026-05-16 02:07:45.378 [INFO] BraveChatController: Enabling Temporary Chat via URL navigation...
+2026-05-16 02:07:47.962 [INFO] BraveChatController: Ready to chat.
+2026-05-16 02:07:47.963 [INFO] TEST: EnsureWindowStarted() returned without exception.
+2026-05-16 02:07:48.149 [INFO] Hotkeys registered
+2026-05-16 02:10:04.601 [INFO] Application shutting down
+2026-05-16 02:19:23.045 [INFO] Application starting
+2026-05-16 02:19:23.057 [INFO] Local STT configured: http://127.0.0.1:8080/inference
+2026-05-16 02:19:23.057 [INFO] MainWindow: WebView2 UserDataFolder=C:\Temp\LiveMeetAI_BraveProfile
+2026-05-16 02:19:23.190 [INFO] Hotkeys registered
+2026-05-16 02:19:23.639 [INFO] WebView2: Initialized and navigating to ChatGPT.
+2026-05-16 02:19:25.602 [INFO] WebView2: Navigation completed. Success=True
+2026-05-16 02:20:52.037 [INFO] Application shutting down
+2026-05-16 02:21:40.740 [INFO] Application starting
+2026-05-16 02:21:40.751 [INFO] Local STT configured: http://127.0.0.1:8080/inference
+2026-05-16 02:21:40.752 [INFO] MainWindow: WebView2 UserDataFolder=C:\Temp\LiveMeetAI_BraveProfile
+2026-05-16 02:21:40.854 [INFO] Hotkeys registered
+2026-05-16 02:21:41.033 [INFO] WebView2: Initialized and navigating to ChatGPT.
+2026-05-16 02:21:42.109 [INFO] WebView2: Navigation completed. Success=True
+2026-05-16 02:22:22.632 [INFO] AudioCaptureService: Found 5 recording devices.
+2026-05-16 02:22:22.633 [INFO]   Device 0: Microphone (2- HD video  ) (Channels: 2)
+2026-05-16 02:22:22.633 [INFO]   Device 1: Stereo Mix (Realtek(R) Audio) (Channels: 2)
+2026-05-16 02:22:22.634 [INFO]   Device 2: Microphone (Camo) (Channels: 2)
+2026-05-16 02:22:22.634 [INFO]   Device 3: Microphone (HyperX Cloud III) (Channels: 2)
+2026-05-16 02:22:22.634 [INFO]   Device 4: Microphone (NVIDIA Broadcast) (Channels: 2)
+2026-05-16 02:22:22.646 [INFO] Started system capture
+2026-05-16 02:22:26.373 [INFO] Capture stopped
+2026-05-16 02:22:26.550 [INFO] STT chunk received:  which is explain the difference between hot reloa...
+2026-05-16 02:22:26.925 [INFO] Flush triggered. Sending: 'which is explain the difference between hot reload and hot reload'
+2026-05-16 02:22:26.946 [INFO] WebView2: SendMessage result="sent"
+2026-05-16 02:22:26.946 [INFO] Sent to ChatGPT.
+2026-05-16 02:23:01.767 [INFO] AudioCaptureService: Found 5 recording devices.
+2026-05-16 02:23:01.767 [INFO]   Device 0: Microphone (2- HD video  ) (Channels: 2)
+2026-05-16 02:23:01.768 [INFO]   Device 1: Stereo Mix (Realtek(R) Audio) (Channels: 2)
+2026-05-16 02:23:01.768 [INFO]   Device 2: Microphone (Camo) (Channels: 2)
+2026-05-16 02:23:01.768 [INFO]   Device 3: Microphone (HyperX Cloud III) (Channels: 2)
+2026-05-16 02:23:01.768 [INFO]   Device 4: Microphone (NVIDIA Broadcast) (Channels: 2)
+2026-05-16 02:23:01.774 [INFO] Started system capture
+2026-05-16 02:23:04.034 [INFO] Capture stopped
+2026-05-16 02:23:04.506 [INFO] STT chunk received:  implement animations in Flutter app.
+2026-05-16 02:23:04.598 [INFO] Flush triggered. Sending: 'implement animations in Flutter app.'
+2026-05-16 02:23:04.615 [INFO] WebView2: SendMessage result="sent"
+2026-05-16 02:23:04.615 [INFO] Sent to ChatGPT.
+2026-05-16 02:24:38.274 [INFO] Application shutting down
+2026-05-16 02:33:38.662 [INFO] Application starting
+2026-05-16 02:33:38.673 [INFO] Local STT configured: http://127.0.0.1:8080/inference
+2026-05-16 02:33:38.673 [INFO] MainWindow: WebView2 UserDataFolder=C:\Temp\LiveMeetAI_BraveProfile
+2026-05-16 02:33:38.796 [INFO] Hotkeys registered
+2026-05-16 02:33:38.977 [INFO] WebView2: Initialized and navigating to ChatGPT.
+2026-05-16 02:33:40.175 [INFO] WebView2: Navigation completed. Success=True
+2026-05-16 02:34:28.284 [INFO] AudioCaptureService: Found 5 recording devices.
+2026-05-16 02:34:28.286 [INFO]   Device 0: Microphone (2- HD video  ) (Channels: 2)
+2026-05-16 02:34:28.286 [INFO]   Device 1: Stereo Mix (Realtek(R) Audio) (Channels: 2)
+2026-05-16 02:34:28.287 [INFO]   Device 2: Microphone (Camo) (Channels: 2)
+2026-05-16 02:34:28.287 [INFO]   Device 3: Microphone (HyperX Cloud III) (Channels: 2)
+2026-05-16 02:34:28.287 [INFO]   Device 4: Microphone (NVIDIA Broadcast) (Channels: 2)
+2026-05-16 02:34:28.298 [INFO] Started system capture
+2026-05-16 02:34:29.590 [INFO] Capture stopped
+2026-05-16 02:34:30.005 [INFO] STT chunk received:  Moving on to our next question.
+2026-05-16 02:34:30.084 [INFO] Flush triggered. Sending: 'Moving on to our next question.'
+2026-05-16 02:34:30.106 [INFO] WebView2: SendMessage result="sent"
+2026-05-16 02:34:30.107 [INFO] Sent to ChatGPT.
+2026-05-16 02:34:43.091 [INFO] AudioCaptureService: Found 5 recording devices.
+2026-05-16 02:34:43.092 [INFO]   Device 0: Microphone (2- HD video  ) (Channels: 2)
+2026-05-16 02:34:43.092 [INFO]   Device 1: Stereo Mix (Realtek(R) Audio) (Channels: 2)
+2026-05-16 02:34:43.092 [INFO]   Device 2: Microphone (Camo) (Channels: 2)
+2026-05-16 02:34:43.093 [INFO]   Device 3: Microphone (HyperX Cloud III) (Channels: 2)
+2026-05-16 02:34:43.093 [INFO]   Device 4: Microphone (NVIDIA Broadcast) (Channels: 2)
+2026-05-16 02:34:43.097 [INFO] Started system capture
+2026-05-16 02:34:45.729 [INFO] Capture stopped
+2026-05-16 02:34:46.589 [INFO] STT chunk received:  which is how do you optimize performance in Flutt...
+2026-05-16 02:34:46.660 [INFO] Flush triggered. Sending: 'which is how do you optimize performance in Flutter app.'
+2026-05-16 02:34:46.681 [INFO] WebView2: SendMessage result="sent"
+2026-05-16 02:34:46.682 [INFO] Sent to ChatGPT.
+2026-05-16 02:36:03.309 [INFO] Application shutting down

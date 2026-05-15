@@ -8,17 +8,40 @@
     ".NETCoreApp,Version=v7.0": {
       "LiveMeetAI.App/1.0.0": {
         "dependencies": {
+          "Microsoft.Web.WebView2": "1.0.3967.48",
           "NAudio": "2.1.0",
           "Newtonsoft.Json": "13.0.3",
           "Selenium.Support": "4.11.0",
           "Selenium.WebDriver": "4.11.0",
-          "Selenium.WebDriver.ChromeDriver": "116.0.5845.9600"
+          "Selenium.WebDriver.ChromeDriver": "116.0.5845.9600",
+          "Microsoft.Web.WebView2.Core": "1.0.3967.48",
+          "Microsoft.Web.WebView2.WinForms": "1.0.3967.48",
+          "Microsoft.Web.WebView2.Wpf": "1.0.3967.48"
         },
         "runtime": {
           "LiveMeetAI.App.dll": {}
         }
       },
       "Microsoft.NETCore.Platforms/3.1.0": {},
+      "Microsoft.Web.WebView2/1.0.3967.48": {
+        "runtimeTargets": {
+          "runtimes/win-arm64/native/WebView2Loader.dll": {
+            "rid": "win-arm64",
+            "assetType": "native",
+            "fileVersion": "1.0.3967.48"
+          },
+          "runtimes/win-x64/native/WebView2Loader.dll": {
+            "rid": "win-x64",
+            "assetType": "native",
+            "fileVersion": "1.0.3967.48"
+          },
+          "runtimes/win-x86/native/WebView2Loader.dll": {
+            "rid": "win-x86",
+            "assetType": "native",
+            "fileVersion": "1.0.3967.48"
+          }
+        }
+      },
       "Microsoft.Win32.Registry/4.7.0": {
         "dependencies": {
           "System.Security.AccessControl": "4.7.0",
@@ -143,7 +166,31 @@
           "System.Security.Principal.Windows": "4.7.0"
         }
       },
-      "System.Security.Principal.Windows/4.7.0": {}
+      "System.Security.Principal.Windows/4.7.0": {},
+      "Microsoft.Web.WebView2.Core/1.0.3967.48": {
+        "runtime": {
+          "Microsoft.Web.WebView2.Core.dll": {
+            "assemblyVersion": "1.0.3967.48",
+            "fileVersion": "1.0.3967.48"
+          }
+        }
+      },
+      "Microsoft.Web.WebView2.WinForms/1.0.3967.48": {
+        "runtime": {
+          "Microsoft.Web.WebView2.WinForms.dll": {
+            "assemblyVersion": "1.0.3967.48",
+            "fileVersion": "1.0.3967.48"
+          }
+        }
+      },
+      "Microsoft.Web.WebView2.Wpf/1.0.3967.48": {
+        "runtime": {
+          "Microsoft.Web.WebView2.Wpf.dll": {
+            "assemblyVersion": "1.0.3967.48",
+            "fileVersion": "1.0.3967.48"
+          }
+        }
+      }
     }
   },
   "libraries": {
@@ -158,6 +205,13 @@
       "sha512": "sha512-z7aeg8oHln2CuNulfhiLYxCVMPEwBl3rzicjvIX+4sUuCwvXw5oXQEtbiU2c0z4qYL5L3Kmx0mMA/+t/SbY67w==",
       "path": "microsoft.netcore.platforms/3.1.0",
       "hashPath": "microsoft.netcore.platforms.3.1.0.nupkg.sha512"
+    },
+    "Microsoft.Web.WebView2/1.0.3967.48": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-b7dZ5kZ9bfU5Yo11M8feCOoiyalXCN+2Gsw674RBDBmQ2dJV5EOXb8/ivN2LuLJ+VO2V7FmK6l6LsyfEnG1lXw==",
+      "path": "microsoft.web.webview2/1.0.3967.48",
+      "hashPath": "microsoft.web.webview2.1.0.3967.48.nupkg.sha512"
     },
     "Microsoft.Win32.Registry/4.7.0": {
       "type": "package",
@@ -256,6 +310,21 @@
       "sha512": "sha512-ojD0PX0XhneCsUbAZVKdb7h/70vyYMDYs85lwEI+LngEONe/17A0cFaRFqZU+sOEidcVswYWikYOQ9PPfjlbtQ==",
       "path": "system.security.principal.windows/4.7.0",
       "hashPath": "system.security.principal.windows.4.7.0.nupkg.sha512"
+    },
+    "Microsoft.Web.WebView2.Core/1.0.3967.48": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Microsoft.Web.WebView2.WinForms/1.0.3967.48": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Microsoft.Web.WebView2.Wpf/1.0.3967.48": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
     }
   }
 }

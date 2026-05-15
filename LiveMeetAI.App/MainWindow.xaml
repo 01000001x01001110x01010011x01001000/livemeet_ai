@@ -1,26 +1,82 @@
 <Window x:Class="LiveMeetAI.App.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="LiveMeetAI" Height="480" Width="800">
+        xmlns:wv2="clr-namespace:Microsoft.Web.WebView2.Wpf;assembly=Microsoft.Web.WebView2.Wpf"
+        Title="LiveMeetAI" Height="800" Width="1100"
+        Background="#1e1e1e"
+        Topmost="True">
+
+    <Window.Resources>
+        <Style TargetType="TextBox">
+            <Setter Property="Background" Value="#2d2d2d"/>
+            <Setter Property="Foreground" Value="#d4d4d4"/>
+            <Setter Property="BorderBrush" Value="#3e3e3e"/>
+            <Setter Property="CaretBrush" Value="#d4d4d4"/>
+            <Setter Property="SelectionBrush" Value="#0078d4"/>
+        </Style>
+
+        <Style TargetType="TextBlock">
+            <Setter Property="Foreground" Value="#cccccc"/>
+        </Style>
+
+        <Style TargetType="Button">
+            <Setter Property="Background" Value="#3c3c3c"/>
+            <Setter Property="Foreground" Value="#d4d4d4"/>
+            <Setter Property="BorderBrush" Value="#555555"/>
+            <Setter Property="Padding" Value="8,4"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="1" CornerRadius="3"
+                                Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#4a4a4a"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Background" Value="#585858"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Opacity" Value="0.4"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
     <Grid Margin="8">
         <Grid.RowDefinitions>
-            <RowDefinition Height="2*"/>
-            <RowDefinition Height="2*"/>
+            <RowDefinition Height="160"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <TextBox x:Name="TranscriptBox" Grid.Row="0" IsReadOnly="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" />
-        <TextBox x:Name="AiBox" Grid.Row="1" IsReadOnly="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" />
+        <TextBox x:Name="TranscriptBox" Grid.Row="0"
+                 IsReadOnly="True" TextWrapping="Wrap"
+                 VerticalScrollBarVisibility="Auto" FontSize="12"/>
 
-        <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="0,8,0,0">
+        <wv2:WebView2 x:Name="ChatWebView" Grid.Row="1" Margin="0,4,0,0"/>
+
+        <TextBlock x:Name="StatusBar" Grid.Row="2"
+                   TextWrapping="Wrap" Margin="0,4,0,0"
+                   Foreground="#777777" FontSize="11"/>
+
+        <StackPanel Grid.Row="3" Orientation="Horizontal" Margin="0,6,0,0">
             <TextBlock VerticalAlignment="Center" Text="Ask (manual):" Margin="0,0,6,0"/>
-            <TextBox x:Name="AskBox" Width="400" />
-            <Button Content="Open Browser" Click="OpenBrowser_Click" Margin="6,0,0,0"/>
-            <Button x:Name="TopMostToggleButton" Content="Brave On Top: ON" Click="ToggleBraveTopMost_Click" Margin="6,0,0,0"/>
+            <TextBox x:Name="AskBox" Width="400"/>
             <Button Content="Ask" Click="Ask_Click" Margin="6,0,0,0"/>
+            <Button Content="New Chat" Click="OpenBrowser_Click" Margin="6,0,0,0"/>
             <Button Content="Start System" Click="StartSystem_Click" Margin="6,0,0,0"/>
             <Button Content="Start Mic" Click="StartMic_Click" Margin="6,0,0,0"/>
-            <Button Content="Screen Share" Click="ScreenShare_Click" Margin="6,0,0,0" Background="#0078d4" Foreground="White"/>
+            <Button Content="Screen Share" Click="ScreenShare_Click" Margin="6,0,0,0"
+                    Background="#0078d4" Foreground="White"/>
             <Button Content="Stop" Click="Stop_Click" Margin="6,0,0,0"/>
         </StackPanel>
     </Grid>

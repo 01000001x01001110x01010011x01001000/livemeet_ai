@@ -3,5 +3,6 @@
   <ImportGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
     <Import Project="$(NuGetPackageRoot)selenium.webdriver.chromedriver\116.0.5845.9600\build\Selenium.WebDriver.ChromeDriver.targets" Condition="Exists('$(NuGetPackageRoot)selenium.webdriver.chromedriver\116.0.5845.9600\build\Selenium.WebDriver.ChromeDriver.targets')" />
     <Import Project="$(NuGetPackageRoot)selenium.webdriver\4.11.0\buildTransitive\Selenium.WebDriver.targets" Condition="Exists('$(NuGetPackageRoot)selenium.webdriver\4.11.0\buildTransitive\Selenium.WebDriver.targets')" />
+    <Import Project="$(NuGetPackageRoot)microsoft.web.webview2\1.0.3967.48\buildTransitive\Microsoft.Web.WebView2.targets" Condition="Exists('$(NuGetPackageRoot)microsoft.web.webview2\1.0.3967.48\buildTransitive\Microsoft.Web.WebView2.targets')" />
   </ImportGroup>
 </Project>
