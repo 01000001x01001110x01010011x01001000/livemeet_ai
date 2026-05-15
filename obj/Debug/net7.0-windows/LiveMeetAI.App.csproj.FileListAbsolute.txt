@@ -9,3 +9,6 @@ C:\Users\pc\Documents\GitHub\livemeet_ai\obj\Debug\net7.0-windows\LiveMeetAI.App
 C:\Users\pc\Documents\GitHub\livemeet_ai\obj\Debug\net7.0-windows\LiveMeetAI.App.AssemblyInfoInputs.cache
 C:\Users\pc\Documents\GitHub\livemeet_ai\obj\Debug\net7.0-windows\LiveMeetAI.App.AssemblyInfo.cs
 C:\Users\pc\Documents\GitHub\livemeet_ai\obj\Debug\net7.0-windows\LiveMeetAI.App.csproj.CoreCompileInputs.cache
+C:\Users\pc\Documents\GitHub\livemeet_ai\obj\Debug\net7.0-windows\LiveMeetAI.App\ScreenShareWindow.baml
+C:\Users\pc\Documents\GitHub\livemeet_ai\obj\Debug\net7.0-windows\LiveMeetAI.App\ScreenShareWindow.g.cs
+C:\Users\pc\Documents\GitHub\livemeet_ai\obj\Debug\net7.0-windows\LiveMeetAI.App.sourcelink.json

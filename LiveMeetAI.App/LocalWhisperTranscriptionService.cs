@@ -11,6 +11,8 @@ namespace LiveMeetAI.STT
     // Local transcription service that converts to 16k mono WAV and posts to a local server
     public class LocalWhisperTranscriptionService : ITranscriptionService
     {
+        private static readonly HttpClient _httpClient = new HttpClient { Timeout = TimeSpan.FromSeconds(60) };
+
         private readonly string endpoint;
         public event Action<string>? OnTranscriptChunk;
 
@@ -36,7 +38,6 @@ namespace LiveMeetAI.STT
                 normalized = wavBytes; // fallback
             }
 
-            using var client = new HttpClient { Timeout = TimeSpan.FromSeconds(30) };
             using var content = new MultipartFormDataContent();
             var byteContent = new ByteArrayContent(normalized);
             byteContent.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("audio/wav");
@@ -44,7 +45,7 @@ namespace LiveMeetAI.STT
 
             try
             {
-                var resp = await client.PostAsync(endpoint, content);
+                var resp = await _httpClient.PostAsync(endpoint, content);
                 var body = await resp.Content.ReadAsStringAsync();
 
                 if (!resp.IsSuccessStatusCode)

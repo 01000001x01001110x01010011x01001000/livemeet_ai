@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("LiveMeetAI.App")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4506c7d5a7e8cc540d883c5280d29c67cfeb9b2e")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+246517fcddd3da27b97b28611d6df5d45f90d8ce")]
 [assembly: System.Reflection.AssemblyProductAttribute("LiveMeetAI.App")]
 [assembly: System.Reflection.AssemblyTitleAttribute("LiveMeetAI.App")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

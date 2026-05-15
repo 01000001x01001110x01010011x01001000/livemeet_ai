@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET7_0;NETCOREAPP
 
-2-1560683118
+3989880223
 
-191984146608
+23840177063
 216-374478733
-LiveMeetAI.App\App.xaml;LiveMeetAI.App\MainWindow.xaml;
+LiveMeetAI.App\App.xaml;LiveMeetAI.App\MainWindow.xaml;LiveMeetAI.App\ScreenShareWindow.xaml;
 
 False
 

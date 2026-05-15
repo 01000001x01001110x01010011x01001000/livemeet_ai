@@ -22,6 +22,7 @@ namespace LiveMeetAI.AI
         private readonly TimeSpan defaultTimeout = TimeSpan.FromSeconds(60);
         private readonly SemaphoreSlim _driverLock = new SemaphoreSlim(1, 1);
         private bool _alwaysOnTop = true;
+        private bool _excludeFromCapture = false;
         private bool _isAttachedToExistingBrowser = false;
 
         public BraveChatController(string bravePath, string userDataDir, string? chromeDriverDir = null)
@@ -32,11 +33,18 @@ namespace LiveMeetAI.AI
         }
 
         public bool IsAlwaysOnTopEnabled => _alwaysOnTop;
+        public bool IsExcludeFromCaptureEnabled => _excludeFromCapture;
 
         public void SetAlwaysOnTop(bool enabled)
         {
             _alwaysOnTop = enabled;
             ApplyAlwaysOnTopToBraveWindows(enabled);
+        }
+
+        public void SetExcludeFromCapture(bool exclude)
+        {
+            _excludeFromCapture = exclude;
+            ApplyExcludeFromCaptureToBraveWindows(exclude);
         }
 
         /// <summary>
@@ -65,7 +73,7 @@ namespace LiveMeetAI.AI
 
                 // Create ChromeDriverService
                 service = driverFolder != null && Directory.Exists(driverFolder)
-                    ? ChromeDriverService.CreateDefaultService(driverFolder)
+                    ? ChromeDriverService.CreateDefaultService(driverFolder, "chromedriver.exe")
                     : ChromeDriverService.CreateDefaultService();
 
                 service.SuppressInitialDiagnosticInformation = true;
@@ -153,6 +161,7 @@ namespace LiveMeetAI.AI
                 }
 
                 ApplyAlwaysOnTopToBraveWindows(_alwaysOnTop);
+                ApplyExcludeFromCaptureToBraveWindows(_excludeFromCapture);
 
                 // Verify we are on the right page or navigate if needed
                 try 
@@ -442,12 +451,40 @@ namespace LiveMeetAI.AI
             }
         }
 
+        private void ApplyExcludeFromCaptureToBraveWindows(bool exclude)
+        {
+            try
+            {
+                uint affinity = exclude ? WDA_EXCLUDEFROMCAPTURE : WDA_NONE;
+                foreach (var process in Process.GetProcessesByName("brave"))
+                {
+                    try
+                    {
+                        var hwnd = process.MainWindowHandle;
+                        if (hwnd == IntPtr.Zero) continue;
+                        SetWindowDisplayAffinity(hwnd, affinity);
+                    }
+                    catch { /* best effort */ }
+                }
+                FileLogger.Info($"BraveChatController: ExcludeFromCapture {(exclude ? "enabled" : "disabled")}");
+            }
+            catch (Exception ex)
+            {
+                FileLogger.Warn("BraveChatController: failed applying ExcludeFromCapture: " + ex.Message);
+            }
+        }
+
         private static readonly IntPtr HWND_TOPMOST = new IntPtr(-1);
         private static readonly IntPtr HWND_NOTOPMOST = new IntPtr(-2);
         private const int SW_RESTORE = 9;
         private const uint SWP_NOSIZE = 0x0001;
         private const uint SWP_NOMOVE = 0x0002;
         private const uint SWP_NOACTIVATE = 0x0010;
+        private const uint WDA_NONE = 0x00000000;
+        private const uint WDA_EXCLUDEFROMCAPTURE = 0x00000011;
+
+        [DllImport("user32.dll", SetLastError = true)]
+        private static extern bool SetWindowDisplayAffinity(IntPtr hWnd, uint dwAffinity);
 
         [DllImport("user32.dll")]
         private static extern bool SetWindowPos(

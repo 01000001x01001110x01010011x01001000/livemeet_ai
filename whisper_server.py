@@ -1,14 +1,20 @@
 from flask import Flask, request, jsonify
 import whisper, os, traceback, time, threading
 import numpy as np
+import torch
 
 app = Flask(__name__)
 model_lock = threading.Lock()
 
+device = "cuda" if torch.cuda.is_available() else "cpu"
+print(f"Using device: {device}", flush=True)
+if device == "cuda":
+    print(f"GPU: {torch.cuda.get_device_name(0)}", flush=True)
+
 print("Loading Whisper model (this can take a while)...", flush=True)
 model_name = os.environ.get("WHISPER_MODEL", "medium")
-model = whisper.load_model(model_name)
-print("Model loaded.", flush=True)
+model = whisper.load_model(model_name, device=device)
+print(f"Model '{model_name}' loaded on {device}.", flush=True)
 
 @app.route("/inference", methods=["POST"])
 def inference():
@@ -46,7 +52,7 @@ def inference():
             # Avoid a strong initial prompt because it can inject unrelated words.
             result = model.transcribe(
                 audio,
-                fp16=False,
+                fp16=(device == "cuda"),
                 language="en",
                 task="transcribe",
                 condition_on_previous_text=False,

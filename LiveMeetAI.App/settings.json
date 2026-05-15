@@ -1,7 +1,7 @@
 ﻿{
   "BravePath": "C:\\Program Files\\BraveSoftware\\Brave-Browser\\Application\\brave.exe",
-  "UserDataDir": "C:\\Users\\pc\\AppData\\Local\\BraveSoftware\\Brave-Browser\\User Data\\LiveMeetProfile",
-  "ChromeDriverDir": "",
+  "UserDataDir": "C:\\Temp\\LiveMeetAI_BraveProfile",
+  "ChromeDriverDir": "C:\\Tools\\chromedriver147\\chromedriver-win64",
   "BraveAlwaysOnTop": true,
   "TranscriptionProvider": "Local",
   "LocalTranscriptionEndpoint": "http://127.0.0.1:8080/inference"
